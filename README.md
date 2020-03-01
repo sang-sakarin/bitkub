@@ -8,7 +8,10 @@ A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-
 
 - [Installation](#installation)
 - [Usage](#usage)
-  - coming soon
+  - [Creating a Bitkub](#creating)
+  - [Viewing status](#viewingstatus)
+  - [Viewing servertime](#viewingservertime)
+  - Coming Soon ...
 
 ## Installation <a name="installation"></a>
 
@@ -16,4 +19,47 @@ A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-
 
 ## Usage <a name="usage"></a>
 
-    from bitkub import bitkub
+    from bitkub import Bitkub
+
+### Creating a Bitkub Object <a name="creating"></a>
+
+    bitkub = Bitkub()
+
+[
+      {
+        'name': 'Non-secure endpoints',
+        'status': 'ok',
+        'message': ''
+      },
+      {
+        'name': 'Secure endpoints',
+        'status': 'ok',
+        'message': ''
+      }
+    ]
+### Viewing status <a name="viewingstatus"></a>
+#### Function
+    bitkub.status()
+
+#### Response:
+
+    [
+      {
+        'name': 'Non-secure endpoints',
+        'status': 'ok',
+        'message': ''
+      },
+      {
+        'name': 'Secure endpoints',
+        'status': 'ok',
+        'message': ''
+      }
+    ]
+
+### Viewing servertime <a name="viewingservertime"></a>
+#### Function
+    bitkub.servertime()
+
+#### Response:
+
+    1583051817
