@@ -25,18 +25,6 @@ A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-
 
     bitkub = Bitkub()
 
-[
-      {
-        'name': 'Non-secure endpoints',
-        'status': 'ok',
-        'message': ''
-      },
-      {
-        'name': 'Secure endpoints',
-        'status': 'ok',
-        'message': ''
-      }
-    ]
 ### Viewing status <a name="viewingstatus"></a>
 #### Function
     bitkub.status()
