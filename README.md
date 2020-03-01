@@ -10,10 +10,10 @@ A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-
 - [Usage](#usage)
   - coming soon
 
-Installation <a name="installation"></a>
+## Installation <a name="installation"></a>
 
     pip install bitkub
 
-Usage <a name="usage"></a>
+## Usage <a name="usage"></a>
 
     from bitkub import bitkub
