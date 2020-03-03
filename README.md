@@ -275,7 +275,7 @@ List all open orders.
 Get depth information.
 
 #### Function:
-    bitkub.depth(sym='THB_BTC', lmt=1))
+    bitkub.depth(sym='THB_BTC', lmt=1)
 #### Query:
 
   * ```sym``` **string** The symbol
