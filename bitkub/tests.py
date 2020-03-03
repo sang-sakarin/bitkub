@@ -21,21 +21,29 @@ class BitkubTest(TestCase):
         self.assertTrue(True)
 
     def test_ticker(self):
-        # print(self.bitkub.ticker())
+        # print(self.bitkub.ticker('THB_BTC'))
         self.assertTrue(True)
 
     def test_trades(self):
-        # print(self.bitkub.trades("THB_BTC", 10))
+        # print(self.bitkub.trades(sym="THB_BTC", lmt=2))
         self.assertTrue(True)
 
     def test_bids(self):
-        # print(self.bitkub.bids("THB_BTC", 10))
+        # print(self.bitkub.bids(sym="THB_BTC", lmt=2))
         self.assertTrue(True)
 
     def test_asks(self):
-        # print(self.bitkub.asks("THB_BTC", 10))
+        # print(self.bitkub.asks(sym="THB_BTC", lmt=2))
         self.assertTrue(True)
 
     def test_books(self):
-        print(self.bitkub.books("THB_BTC", 10))
+        # print(self.bitkub.books(sym="THB_BTC", lmt=1))
+        self.assertTrue(True)
+
+    def test_tradingview(self):
+        # print(self.bitkub.tradingview())
+        self.assertTrue(True)
+
+    def test_depth(self):
+        # print(self.bitkub.depth(sym='THB_BTC', lmt=1))
         self.assertTrue(True)
