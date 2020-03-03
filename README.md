@@ -101,7 +101,7 @@ Get ticker information.
 #### Function:
     bitkub.ticker(sym='THB_BTC')
 
-#### Query
+#### Query:
 
   * ```sym``` **string** The symbol (optional) ```default``` ""
 
@@ -133,7 +133,7 @@ List recent trades.
 #### Function:
     bitkub.trades(sym="THB_BTC", lmt=2)
 
-#### Query
+#### Query:
 
   * ```sym``` **string** The symbol
   * ```lmt``` **int** No. of limit to query recent trades ```default``` 1
@@ -167,7 +167,7 @@ List open buy orders.
 #### Function:
     bitkub.bids(sym="THB_BTC", lmt=2)
 
-#### Query
+#### Query:
 
   * ```sym``` **string** The symbol
   * ```lmt``` **int** No. of limit to query open buy orders ```default``` 1
@@ -202,10 +202,10 @@ List open sell orders.
 
 #### Function:
     bitkub.asks(sym="THB_BTC", lmt=2)
-#### Query
+#### Query:
 
   * ```sym``` **string** The symbol
-  * ```lmt``` **int** No. of limit to query open buy orders ```default``` 1
+  * ```lmt``` **int** No. of limit to query open sell orders ```default``` 1
 
 #### Response:
 
@@ -237,10 +237,10 @@ List all open orders.
 
 #### Function:
     bitkub.books(sym="THB_BTC", lmt=1)
-#### Query
+#### Query:
 
   * ```sym``` **string** The symbol
-  * ```lmt``` **int** No. of limit to query open buy orders ```default``` 1
+  * ```lmt``` **int** No. of imit to query open orders ```default``` 1
 
 #### Response:
 
@@ -276,10 +276,10 @@ Get depth information.
 
 #### Function:
     bitkub.depth(sym='THB_BTC', lmt=1))
-#### Query
+#### Query:
 
   * ```sym``` **string** The symbol
-  * ```lmt``` **int** No. of limit to query open buy orders ```default``` 1
+  * ```lmt``` **int** Depth size  ```default``` 1
 
 #### Response:
 
