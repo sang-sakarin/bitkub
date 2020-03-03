@@ -31,27 +31,37 @@ class Bitkub:
 
         return basic_request('GET', url)
 
-    def ticker(self):
-        url = self._get_path("MARKET_TICKER_PATH")
+    def ticker(self, sym=''):
+        url = self._get_path("MARKET_TICKER_PATH", sym=sym)
 
         return basic_request('GET', url)
 
-    def trades(self, sym, lmt):
+    def trades(self, sym='', lmt=1):
         url = self._get_path("MARKET_TRADES_PATH", sym=sym, lmt=lmt)
 
         return basic_request('GET', url)
 
-    def bids(self, sym, lmt):
+    def bids(self, sym='', lmt=1):
         url = self._get_path("MARKET_BIDS_PATH", sym=sym, lmt=lmt)
 
         return basic_request('GET', url)
 
-    def asks(self, sym, lmt):
+    def asks(self, sym='', lmt=1):
         url = self._get_path("MARKET_ASKS_PATH", sym=sym, lmt=lmt)
 
         return basic_request('GET', url)
 
-    def books(self, sym, lmt):
+    def books(self, sym='', lmt=1):
         url = self._get_path("MARKET_BOOKS_PATH", sym=sym, lmt=lmt)
+
+        return basic_request('GET', url)
+
+    def tradingview(self, sym='', int=1, frm='', to=''):
+        url = self._get_path("MARKET_TRADING_VIEW_PATH", sym=sym, int=int, frm=frm, to=to)
+
+        return basic_request('GET', url)
+
+    def depth(self, sym='', lmt=1):
+        url = self._get_path("MARKET_DEPTH_PATH", sym=sym, lmt=lmt)
 
         return basic_request('GET', url)
