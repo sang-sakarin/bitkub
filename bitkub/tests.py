@@ -1,3 +1,5 @@
+import os
+
 from bitkub import Bitkub
 from unittest import TestCase
 
@@ -6,7 +8,12 @@ class BitkubTest(TestCase):
 
     @classmethod
     def setUpClass(cls):
+        API_KEY = os.getenv("API_KEY")
+        API_SECRET = os.getenv("API_SECRET")
+
         cls.bitkub = Bitkub()
+        cls.bitkub.set_api_key(API_KEY)
+        cls.bitkub.set_api_secret(API_SECRET)
 
     def test_status(self):
         # print(self.bitkub.status())
@@ -46,4 +53,8 @@ class BitkubTest(TestCase):
 
     def test_depth(self):
         # print(self.bitkub.depth(sym='THB_BTC', lmt=1))
+        self.assertTrue(True)
+
+    def test_wallet(self):
+        # print(self.bitkub.wallet())
         self.assertTrue(True)
