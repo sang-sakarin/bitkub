@@ -338,4 +338,4 @@ Get user available balances.
         'BTC': 0,
         'ETH': 0
       }
-  }
+    }
