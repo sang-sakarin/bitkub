@@ -1,6 +1,8 @@
 """
 A libraly that provides a python interface to Bitkub API
 """
+import time
+
 from .constants import ENDPOINTS
 from .request import basic_request
 
@@ -15,6 +17,20 @@ class Bitkub:
         Get full endpoint for a specific path.
         """
         return self.API_ROOT + ENDPOINTS[path_name].format(**kwargs)
+
+    def _get_headers(self):
+        headers = {
+            "accept": "application/json",
+            "content-type": "application/json",
+            "X-BTK-APIKEY": "{0}".format(self.api_key)
+        }
+
+        return headers
+
+    def _get_timestamp(self):
+        timestamp = int(time.time())
+
+        return timestamp
 
     def status(self):
         url = self._get_path("STATUS_PATH")
@@ -65,3 +81,8 @@ class Bitkub:
         url = self._get_path("MARKET_DEPTH_PATH", sym=sym, lmt=lmt)
 
         return basic_request('GET', url)
+
+    def wallet(self):
+        url = self._get_path("MARKET_WALLET")
+
+        return basic_request('POST', url, token=self.api_key)
