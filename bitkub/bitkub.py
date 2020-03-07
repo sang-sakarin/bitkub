@@ -55,6 +55,12 @@ class Bitkub:
 
         return payload
 
+    def set_api_key(self, api_key):
+        self.api_key = api_key
+
+    def set_api_secret(self, api_secret):
+        self.api_secret = api_secret
+
     def status(self):
         url = self._get_path("STATUS_PATH")
 
