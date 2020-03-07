@@ -7,7 +7,7 @@ long_description = pypandoc.convert('README.md', 'rst')
 
 setup(
     name='bitkub',
-    version='0.1.0',
+    version='0.1.1',
     description='A Python library for Bitkub API',
     long_description=long_description,
     url='https://github.com/sang-sakarin/bitkub',
