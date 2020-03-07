@@ -1,0 +1,2 @@
+class BitkubError(Exception):
+    pass
