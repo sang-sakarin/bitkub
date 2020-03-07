@@ -9,6 +9,7 @@ A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-
 - [Installation](#installation)
 - [Usage](#usage)
   - [Creating a Bitkub](#creating)
+  - [Set API key & API secret](#api_key)
   - [Viewing status](#viewingstatus)
   - [Viewing servertime](#viewingservertime)
   - [Viewing symbols](#viewingsymbols)
@@ -18,6 +19,7 @@ A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-
   - [Viewing asks](#viewingasks)
   - [Viewing books](#viewingbooks)
   - [Viewing depth](#viewingdepth)
+  - [Viewing wallet](#viewingwallet)
   - Coming Soon ...
 
 ## Installation <a name="installation"></a>
@@ -30,7 +32,26 @@ A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-
 
 ### Creating a Bitkub Object <a name="creating"></a>
 
+    API_KEY = 'YOUR API KEY'
+    API_SECRET = 'YOUR API SECRET'
+
+    # initial obj only non-secure
     bitkub = Bitkub()
+
+    # initial obj non-secure and secure
+    bitkub = Bitkub(api_key=API_KEY, api_secret=API_SECRET)
+
+You can find API KEY and API SECRET from [here](https://www.bitkub.com/publicapi).
+
+### Set API key and API secret <a name="api_key"></a>
+  If you initial obj with only non-secure. You can set up API key and API secret on below.
+
+    API_KEY = 'YOUR API KEY'
+    API_SECRET = 'YOUR API SECRET'
+
+    bitkub = Bitkub()
+    bitkub.set_api_key(API_KEY)
+    bitkub.set_api_secret(API_SECRET)
 
 ### Viewing status <a name="viewingstatus"></a>
 
@@ -297,3 +318,24 @@ Get depth information.
         ]
       ]
     }
+
+
+### Viewing wallet <a name="viewingwallet"></a>
+
+#### Description:
+Get user available balances.
+```Required initial secure obj```
+
+#### Function:
+    bitkub.wallet()
+
+#### Response:
+
+    {
+      'error': 0,
+      'result': {
+        'THB': 0,
+        'BTC': 0,
+        'ETH': 0
+      }
+  }
