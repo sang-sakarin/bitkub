@@ -49,9 +49,12 @@ class Bitkub:
 
         return timestamp
 
-    def _get_payload(self):
+    def _get_payload(self, **kwargs):
         payload = {}
         payload["ts"] = self._get_timestamp()
+        payload.update(kwargs)
+        payload["sig"] = self._get_signature(payload)
+        payload = self._json_encode(payload)
 
         return payload
 
@@ -115,8 +118,19 @@ class Bitkub:
     def wallet(self):
         url = self._get_path("MARKET_WALLET")
         payload = self._get_payload()
-        signature = self._get_signature(payload)
-        payload["sig"] = signature
-        payload = self._json_encode(payload)
+
+        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+
+    @check_in_attributes(["api_key", "api_secret"])
+    def balances(self):
+        url = self._get_path("MARKET_BALANCES")
+        payload = self._get_payload()
+
+        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+
+    @check_in_attributes(["api_key", "api_secret"])
+    def place_bid(self, sym='', amt=1, rat=1, typ='limit'):
+        url = self._get_path("MARKET_PLACE_BID")
+        payload = self._get_payload(sym=sym, amt=amt, rat=rat, typ=typ)
 
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
