@@ -134,3 +134,31 @@ class Bitkub:
         payload = self._get_payload(sym=sym, amt=amt, rat=rat, typ=typ)
 
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+
+    @check_in_attributes(["api_key", "api_secret"])
+    def place_ask(self, sym='', amt=1, rat=1, typ='limit'):
+        url = self._get_path("MARKET_PLACE_ASK")
+        payload = self._get_payload(sym=sym, amt=amt, rat=rat, typ=typ)
+
+        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+
+    @check_in_attributes(["api_key", "api_secret"])
+    def place_ask_by_fiat(self, sym='', amt=1, rat=1, typ='limit'):
+        url = self._get_path("MARKET_PLACE_ASK_BY_FIAT")
+        payload = self._get_payload(sym=sym, amt=amt, rat=rat, typ=typ)
+
+        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+
+    @check_in_attributes(["api_key", "api_secret"])
+    def cancel_order(self, sym='', id=None, sd='buy', hash=''):
+        url = self._get_path("MARKET_CANCEL_ORDER")
+        payload = self._get_payload(sym=sym, id=id, sd=sd, hash=hash)
+
+        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+
+    @check_in_attributes(["api_key", "api_secret"])
+    def my_open_orders(self, sym=''):
+        url = self._get_path("MARKET_MY_OPEN_ORDERS")
+        payload = self._get_payload(sym=sym)
+
+        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
