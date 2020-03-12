@@ -162,3 +162,24 @@ class Bitkub:
         payload = self._get_payload(sym=sym)
 
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+
+    @check_in_attributes(["api_key", "api_secret"])
+    def my_open_history(self, sym='', p=1, lmt=10, start=None, end=None):
+        url = self._get_path("MARKET_MY_ORDER_HISTORY")
+        payload = self._get_payload(sym=sym, p=p, lmt=lmt, start=start, end=end)
+
+        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+
+    @check_in_attributes(["api_key", "api_secret"])
+    def order_info(self, sym='', id=1, sd='buy', hash=''):
+        url = self._get_path("MARKET_ORDER_INFO")
+        payload = self._get_payload(sym=sym, id=id, sd=sd, hash=hash)
+
+        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+
+    @check_in_attributes(["api_key", "api_secret"])
+    def crypto_address(self, p=1, lmt=1):
+        url = self._get_path("CRYPTO_ADDRESSES")
+        payload = self._get_payload(p=p, lmt=lmt)
+
+        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
