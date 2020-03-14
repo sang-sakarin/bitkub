@@ -20,7 +20,26 @@ A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-
   - [Viewing books](#viewingbooks)
   - [Viewing depth](#viewingdepth)
   - [Viewing wallet](#viewingwallet)
-  - Coming Soon ...
+  - [Viewing balances](#viewingbalances)
+  - [Create buy order](#createbuyorder)
+  - [Create sell order](#createsellorder)
+  - [Create sell order by fiat](#createsellorderfiat)
+  - [Cancel order](#cancelorder)
+  - [My open orders](#myopenorders)
+  - [My order history](#myorderhistory)
+  - [Order info](#orderinfo)
+  - [Crypto addresses](#cryptoaddressses)
+  - [Crypto withdraw](#cryptowithdraw)
+  - [Crypto deposit history](#cryptodeposithistory)
+  - [Crypto withdraw history](#cryptowithdrawhistory)
+  - [Fiat accounts](#fiataccounts)
+  - [Fiat withdraw](#fiatwithdraw)
+  - [Fiat deposit history](#fiatdeposithistory)
+  - [Fiat withdraw history](#fiatwithdrawhistory)
+  - [Market wstoken](#marketwstoken)
+  - [User limits](#userlimits)
+  - [User trading credits](#usertradingcredits)
+
 
 ## Installation <a name="installation"></a>
 
@@ -122,7 +141,7 @@ Get ticker information.
 #### Function:
     bitkub.ticker(sym='THB_BTC')
 
-#### Query:
+#### Parameter:
 
   * ```sym``` **string** The symbol (optional) ```default``` ""
 
@@ -154,10 +173,10 @@ List recent trades.
 #### Function:
     bitkub.trades(sym="THB_BTC", lmt=2)
 
-#### Query:
+#### Parameter:
 
   * ```sym``` **string** The symbol
-  * ```lmt``` **int** No. of limit to query recent trades ```default``` 1
+  * ```lmt``` **int** No. of limit to Parameter recent trades ```default``` 1
 
 #### Response:
 
@@ -188,10 +207,10 @@ List open buy orders.
 #### Function:
     bitkub.bids(sym="THB_BTC", lmt=2)
 
-#### Query:
+#### Parameter:
 
   * ```sym``` **string** The symbol
-  * ```lmt``` **int** No. of limit to query open buy orders ```default``` 1
+  * ```lmt``` **int** No. of limit to Parameter open buy orders ```default``` 1
 
 #### Response:
 
@@ -223,10 +242,10 @@ List open sell orders.
 
 #### Function:
     bitkub.asks(sym="THB_BTC", lmt=2)
-#### Query:
+#### Parameter:
 
   * ```sym``` **string** The symbol
-  * ```lmt``` **int** No. of limit to query open sell orders ```default``` 1
+  * ```lmt``` **int** No. of limit to Parameter open sell orders ```default``` 1
 
 #### Response:
 
@@ -258,10 +277,10 @@ List all open orders.
 
 #### Function:
     bitkub.books(sym="THB_BTC", lmt=1)
-#### Query:
+#### Parameter:
 
   * ```sym``` **string** The symbol
-  * ```lmt``` **int** No. of imit to query open orders ```default``` 1
+  * ```lmt``` **int** No. of imit to Parameter open orders ```default``` 1
 
 #### Response:
 
@@ -297,7 +316,7 @@ Get depth information.
 
 #### Function:
     bitkub.depth(sym='THB_BTC', lmt=1)
-#### Query:
+#### Parameter:
 
   * ```sym``` **string** The symbol
   * ```lmt``` **int** Depth size  ```default``` 1
@@ -338,4 +357,632 @@ Get user available balances.
         'BTC': 0,
         'ETH': 0
       }
+    }
+
+
+### Viewing balances <a name="viewingbalances"></a>
+
+#### Description:
+Get balances info: this includes both available and reserved balances.
+```Required initial secure obj```
+
+#### Function:
+    bitkub.balances()
+
+#### Response:
+
+    {
+      'error': 0,
+      'result': {
+        'THB': {
+          'available': 0,
+          'reserved': 0
+        },
+        'BTC': {
+          'available': 0,
+          'reserved': 0
+        }
+      }
+    }
+
+
+### Create buy order <a name="createbuyorder"></a>
+
+#### Description:
+Create a buy order.
+```Required initial secure obj```
+
+#### Function:
+    bitkub.place_bid(sym='THB_BTC', amt=1, rat=1, typ='limit')
+
+#### Parameter:
+  * ```sym``` **string** The symbol
+  * ```amt``` **float** Amount you want to spend with no trailing zero (e.g 1000.00 is invalid, 1000 is ok) ```default``` 1
+  * ```rat``` **float** Rate you want for the order with no trailing zero (e.g 1000.00 is invalid, 1000 is ok) ```default``` 1
+  * ```typ``` **string** Order type: limit or market ```default``` limit
+
+
+#### Response:
+
+    {
+      'error': 0,
+      'result': {
+        'id': 1,
+        'hash': 'fwQ6dnQWQPs4cbatF5Am2xCDP1J',
+        'typ': 'limit',
+        'amt': 1,
+        'rat': 1,
+        'fee': 2.5,
+        'cre': 2.5,
+        'rec': 0.06666666,
+        'ts': 1533834547
+      }
+    }
+
+
+### Create sell order <a name="createsellorder"></a>
+
+#### Description:
+Create a sell order.
+```Required initial secure obj```
+
+#### Function:
+    bitkub.place_ask(sym='THB_BTC', amt=1, rat=1, typ='limit')
+
+#### Parameter:
+  * ```sym``` **string** The symbol
+  * ```amt``` **float** Amount you want to spend with no trailing zero (e.g 1000.00 is invalid, 1000 is ok) ```default``` 1
+  * ```rat``` **float** Rate you want for the order with no trailing zero (e.g 1000.00 is invalid, 1000 is ok) ```default``` 1
+  * ```typ``` **string** Order type: limit or market ```default``` limit
+
+
+#### Response:
+
+    {
+      'error': 0,
+      'result': {
+        'id': 1,
+        'hash': 'fwQ6dnQWQPs4cbatF5Am2xCDP1J',
+        'typ': 'limit',
+        'amt': 1,
+        'rat': 1,
+        'fee': 2.5,
+        'cre': 2.5,
+        'rec': 0.06666666,
+        'ts': 1533834547
+      }
+    }
+
+
+### Create sell order by fiat <a name="createsellorderfiat"></a>
+
+#### Description:
+Create a sell order by specifying the fiat amount you want to receive (selling amount of cryptocurrency is automatically calculated).
+```Required initial secure obj```
+
+#### Function:
+    bitkub.place_bid(sym='THB_BTC', amt=1, rat=1, typ='limit')
+
+#### Parameter:
+  * ```sym``` **string** The symbol
+  * ```amt``` **float** Amount you want to spend with no trailing zero (e.g 1000.00 is invalid, 1000 is ok) ```default``` 1
+  * ```rat``` **float** Rate you want for the order with no trailing zero (e.g 1000.00 is invalid, 1000 is ok) ```default``` 1
+  * ```typ``` **string** Order type: limit or market ```default``` limit
+
+
+#### Response:
+
+    {
+      'error': 0,
+      'result': {
+        'id': 1,
+        'hash': 'fwQ6dnQWQPs4cbatF5Am2xCDP1J',
+        'typ': 'limit',
+        'amt': 1,
+        'rat': 1,
+        'fee': 2.5,
+        'cre': 2.5,
+        'rec': 0.06666666,
+        'ts': 1533834547
+      }
+    }
+
+
+### Cancel orrder<a name="cancelorder"></a>
+
+#### Description:
+Cancel an open order.
+```Required initial secure obj```
+
+#### Function:
+    bitkub.cancel_order(sym='THB_BTC', id=1, sd=1, hash='XXXXXX')
+
+#### Parameter:
+  * ```sym``` **string** The symbol
+  * ```id``` **int** Order id you wish to cancel
+  * ```sd``` **string** Order side: buy or sell ```default``` buy
+  * ```hash``` **string** Cancel an order with order hash (optional). You don't need to specify sym, id, and sd when you specify order hash.
+
+
+#### Response:
+
+    {
+      'error': 0
+    }
+
+
+### My open orders<a name="myopenorders"></a>
+
+#### Description:
+List all open orders of the given symbol.
+```Required initial secure obj```
+
+#### Function:
+    bitkub.my_open_orders(sym='THB_BTC')
+
+#### Parameter:
+  * ```sym``` **string** The symbol
+
+
+#### Response:
+
+    {
+      'error': 0,
+      'result': [
+        {
+          'id': 2,
+          'hash': 'fwQ6dnQWQPs4cbatFSJpMCcKTFR',
+          'side': 'SELL',
+          'type': 'limit',
+          'rate': 15000,
+          'fee': 35.01,
+          'credit': 35.01,
+          'amount': 0.93333334,
+          'receive': 14000,
+          'parent_id': 1,
+          'super_id': 1,
+          'ts': 1533834844
+        }
+      ]
+    }
+
+
+### My order history<a name="myorderhistory"></a>
+
+#### Description:
+List all orders that have already matched.
+```Required initial secure obj```
+
+#### Function:
+    bitkub.my_open_history(sym='THB_BTC', p=1, lmt=10)
+
+#### Parameter:
+  * ```sym``` **string** The symbol
+  * ```p``` **string** Page (optional)
+  * ```lmt``` **string** Limit (optional)
+  * ```start``` **string** Start timestamp (optional)
+  * ```end``` **string** End timestamp (optional)
+
+
+#### Response:
+
+    {
+      'error': 0,
+      'result': [
+        {
+          'txn_id': 'ETHBUY0000000197',
+          'order_id': 240,
+          'hash': 'fwQ6dnQWQPs4cbaujNyejinS43a',
+          'parent_order_id': 0,
+          'super_order_id': 0,
+          'taken_by_me': true,
+          'side': 'buy',
+          'type': 'limit',
+          'rate': 13335.57,
+          'fee': 0.34,
+          'credit': 0.34,
+          'amount': 0.00999987,
+          'ts': 1531513395
+        }
+      ],
+      'pagination': {
+        'page': 2,
+        'last': 3,
+        'next': 3,
+        'prev': 1
+      }
+    }
+
+
+### Order info<a name="orderinfo"></a>
+
+#### Description:
+Get information regarding the specified order.
+```Required initial secure obj```
+
+#### Function:
+    bitkub.order_info(sym='THB_BTC', id=1, sd='buy', hash='XXXXXX')
+
+#### Parameter:
+  * ```sym``` **string** The symbol
+  * ```id``` **int** Order id
+  * ```sd``` **string** Order side: buy or sell ```default```  buy
+  * ```hash``` **string** Lookup an order with order hash (optional). You don't need to specify sym, id, and sd when you specify order hash.
+
+
+#### Response:
+
+    {
+      'error': 0,
+      'result': {
+          'id': 289,
+          'first': 289,
+          'parent': 0,
+          'last': 316,
+          'amount': 4000,
+          'rate': 291000,
+          'fee': 10,
+          'credit': 10,
+          'filled': 3999.97,
+          'total': 4000,
+          'status': 'filled',
+          'history': [
+            {
+                'amount': 98.14848,
+                'credit': 0.25,
+                'fee': 0.25,
+                'id': 289,
+                'rate': 291000,
+                'timestamp': 1525944169
+            }
+          ]
+        }
+      }
+
+
+### Crypto addresses<a name="cryptoaddress"></a>
+
+#### Description:
+List all crypto addresses.
+```Required initial secure obj```
+
+#### Function:
+    bitkub.crypto_address(p=1, lmt=1)
+
+#### Parameter:
+  * ```p``` **int** Page (optional) ```default``` 1
+  * ```lmt``` **int** Limit (optional) ```default``` 10
+
+
+#### Response:
+
+    {
+      'error': 0,
+      'result': [
+        {
+           'currency': 'BTC',
+           'address': '3BtxdKw6XSbneNvmJTLVHS9XfNYM7VAe8k',
+           'tag': 0,
+           'time': 1570893867
+        }
+      ],
+      'pagination': {
+        'page': 1,
+        'last": 1
+      }
+    }
+
+
+### Crypto withdraw<a name="cryptowithdraw"></a>
+
+#### Description:
+Make a withdrawal to a trusted address.
+```Required initial secure obj```
+
+#### Function:
+    bitkub.crypto_withdraw(cur='BTC', amt=0.1, adr='4asyjKw6XScneNvhJTLVHS9XfNYM7VBf8x', mem='')
+
+#### Parameter:
+  * ```cur``` **string** Currency for withdrawal (e.g. BTC, ETH)
+  * ```amt``` **float** Amount you want to withdraw
+  * ```adr``` **string** Address to which you want to withdraw
+  * ```mem``` **string** (Optional) Memo or destination tag to which you want to withdraw
+
+
+#### Response:
+
+    {
+      'error': 0,
+      'result': {
+          'txn': 'BTCWD0000012345',
+          'adr': '4asyjKw6XScneNvhJTLVHS9XfNYM7VBf8x'
+          'mem': '',
+          'cur': 'BTC',
+          'amt': 0.1,
+          'fee': 0.0002,
+          'ts': 1569999999
+      }
+    }
+
+
+### Crypto deposit history<a name="cryptodeposithistory"></a>
+
+#### Description:
+List crypto deposit history.
+```Required initial secure obj```
+
+#### Function:
+    bitkub.crypto_deposit_history(p=1, lmt=1)
+
+#### Parameter:
+  * ```p``` **int** Page (optional) ```default``` 1
+  * ```lmt``` **int** Limit (optional) ```default``` 10
+
+
+#### Response:
+
+    {
+      'error': 0,
+      'result': [
+        {
+           'hash': 'XRPWD0000100276',
+           'currency': 'XRP',
+           'amount': 5.75111474,
+           'address': null,
+           'confirmations': 1,
+           'status': 'complete',
+           'time': 1570893867
+        }
+      ],
+      'pagination': {
+        'page': 1,
+        'last': 1
+      }
+    }
+
+
+### Crypto withdraw history<a name="cryptowithdrawhistory"></a>
+
+#### Description:
+List crypto withdrawal history.
+```Required initial secure obj```
+
+#### Function:
+    bitkub.crypto_withdraw_history(p=1, lmt=1)
+
+#### Parameter:
+  * ```p``` **int** Page (optional) ```default``` 1
+  * ```lmt``` **int** Limit (optional) ```default``` 10
+
+
+#### Response:
+
+    {
+      'error': 0,
+      'result': [
+        {
+          'txn_id': 'XRPWD0000100276',
+          'hash': 'send_internal',
+          'currency': 'XRP',
+          'amount': '5.75111474',
+          'fee': 0.01,
+          'address': 'rpXTzCuXtjiPDFysxq8uNmtZBe9Xo97JbW',
+          'status': 'complete',
+          'time': 1570893493
+        }
+      ],
+      'pagination': {
+        'page': 1,
+        'last': 1
+      }
+    }
+
+
+### Fiat accounts<a name="fiataccounts"></a>
+
+#### Description:
+List all approved bank accounts.
+```Required initial secure obj```
+
+#### Function:
+    bitkub.fiat_accounts(p=1, lmt=1)
+
+#### Parameter:
+  * ```p``` **int** Page (optional) ```default``` 1
+  * ```lmt``` **int** Limit (optional) ```default``` 10
+
+
+#### Response:
+
+    {
+      'error': 0,
+      'result': [
+        {
+          'id': '7262109099',
+          'bank': 'Kasikorn Bank',
+          'name': 'Somsak',
+          'time': 1570893867
+        }
+      ],
+      'pagination': {
+        'page': 1,
+        'last': 1
+      }
+    }
+
+
+### Fiat withdraw<a name="fiatwithdraw"></a>
+
+#### Description:
+Make a withdrawal to an approved bank account.
+```Required initial secure obj```
+
+#### Function:
+    bitkub.fiat_withdraw(id=1, amt=1)
+
+#### Parameter:
+  * ```id``` **string** Bank account id
+  * ```amt``` **float** Amount you want to withdraw
+
+
+#### Response:
+
+    {
+      'error': 0,
+      'result': {
+        'txn': 'THBWD0000012345',
+        'acc': '7262109099',
+        'cur': 'THB',
+        'amt': 21,
+        'fee': 20,
+        'rec': 1,
+        'ts': 1569999999
+      }
+    }
+
+
+### Fiat deposit history<a name="fiatdeposithistory"></a>
+
+#### Description:
+List fiat deposit history.
+```Required initial secure obj```
+
+#### Function:
+    bitkub.fiat_deposit_history(p=1, lmt=1)
+
+#### Parameter:
+  * ```p``` **int** Page (optional) ```default``` 1
+  * ```lmt``` **int** Limit (optional) ```default``` 10
+
+
+#### Response:
+
+    {
+      'error':0,
+      'result':[
+        {
+           'txn_id': 'THBDP0000012345',
+           'currency': 'THB',
+           'amount': 5000.55,
+           'status': 'complete',
+           'time': 1570893867
+        }
+      ],
+      'pagination':{
+        'page': 1,
+        'last': 1
+      }
+    }
+
+
+### Fiat withdraw history<a name="fiatwithdrawhistory"></a>
+
+#### Description:
+List fiat withdrawal history.
+```Required initial secure obj```
+
+#### Function:
+    bitkub.fiat_withdraw_history(p=1, lmt=1)
+
+#### Parameter:
+  * ```p``` **int** Page (optional) ```default``` 1
+  * ```lmt``` **int** Limit (optional) ```default``` 10
+
+
+#### Response:
+
+    {
+      'error': 0,
+      'result': [
+        {
+           'txn_id': 'THBDP0000012345',
+           'currency': 'THB',
+           'amount': 5000.55,
+           'fee': 20,
+           'status': 'complete',
+           'time': 1570893867
+        }
+      ],
+      'pagination':{
+        'page': 1,
+        'last': 1
+      }
+    }
+
+
+### Market wstoken<a name="marketwstoken"></a>
+
+#### Description:
+Get the token for websocket authentication.
+```Required initial secure obj```
+
+#### Function:
+    bitkub.market_wstoken()
+
+#### Response:
+
+    {
+      'error': 0,
+      'result': 'sdCBCTwaS2Z1IBB6uTCefIbVN6dQVz9dkDeU96IoFJp14GGhlw9hoUDNe1KSYC23dXBPIqyX2QjVEOFHITxgPMvo8kdVaTkiZBA8KgvVTSMsq6JjjlyERDVZn3tt4PEp'
+    }
+
+### User limits<a name="userlimits"></a>
+
+#### Description:
+Check deposit/withdraw limitations and usage.
+```Required initial secure obj```
+
+#### Function:
+    bitkub.user_limits()
+
+#### Response:
+
+    {
+      'error': 0,
+      'result': {
+        'limits': {
+          'crypto': {
+            'deposit': 0,
+            'withdraw': 0
+          },
+          'fiat': {
+            'deposit': 0,
+            'withdraw': 0
+          }
+        },
+        'usage': {
+          'crypto': {
+            'deposit': 0,
+            'withdraw': 0,
+            'deposit_percentage': 0,
+            'withdraw_percentage': 0,
+            'deposit_thb_equivalent': 0,
+            'withdraw_thb_equivalent': 0
+          },
+          'fiat': {
+            'deposit': 0,
+            'withdraw': 0,
+            'deposit_percentage': 0,
+            'withdraw_percentage': 0
+          }
+        },
+        'rate': 177100.32
+      }
+    }
+
+
+### User trading-credit<a name="usertradingcredits"></a>
+
+#### Description:
+Check trading credit balance.
+```Required initial secure obj```
+
+#### Function:
+    bitkub.user_trading_credits()
+
+#### Response:
+
+    {
+      'error': 0,
+      'result': 0
     }
