@@ -150,7 +150,7 @@ class Bitkub:
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
-    def cancel_order(self, sym='', id=None, sd='buy', hash=''):
+    def cancel_order(self, sym='', id='', sd='buy', hash=''):
         url = self._get_path("MARKET_CANCEL_ORDER")
         payload = self._get_payload(sym=sym, id=id, sd=sd, hash=hash)
 
@@ -171,16 +171,16 @@ class Bitkub:
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
-    def order_info(self, sym='', id=1, sd='buy', hash=''):
+    def order_info(self, sym='', id=None, sd='buy', hash=''):
         url = self._get_path("MARKET_ORDER_INFO")
         payload = self._get_payload(sym=sym, id=id, sd=sd, hash=hash)
 
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
-    def crypto_address(self, p=1, lmt=1):
-        url = self._get_path("CRYPTO_ADDRESSES")
-        payload = self._get_payload(p=p, lmt=lmt)
+    def crypto_address(self, p=1, lmt=10):
+        url = self._get_path("CRYPTO_ADDRESSES", p=p, lmt=lmt)
+        payload = self._get_payload()
 
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
 
@@ -192,42 +192,42 @@ class Bitkub:
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
-    def crypto_deposit_history(self, p=1, lmt=1):
+    def crypto_deposit_history(self, p=1, lmt=10):
         url = self._get_path("CRYPTO_DEPOSIT_HISTORY", p=p, lmt=lmt)
         payload = self._get_payload()
 
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
-    def crypto_withdraw_history(self, p=1, lmt=1):
+    def crypto_withdraw_history(self, p=1, lmt=10):
         url = self._get_path("CRYPTO_WITHDRAW_HISTORY", p=p, lmt=lmt)
         payload = self._get_payload()
 
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
-    def fiat_accounts(self, p=1, lmt=1):
+    def fiat_accounts(self, p=1, lmt=10):
         url = self._get_path("FIAT_ACCOUNTS", p=p, lmt=lmt)
         payload = self._get_payload()
 
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
-    def fiat_withdraw(self, id='', amt=1):
+    def fiat_withdraw(self, id='', amt=0):
         url = self._get_path("FIAT_WITHDRAW")
         payload = self._get_payload(id=id, amt=amt)
 
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
-    def fiat_deposit_history(self, p=1, lmt=1):
+    def fiat_deposit_history(self, p=1, lmt=10):
         url = self._get_path("FIAT_DEPOSIT_HISTORY", p=p, lmt=lmt)
         payload = self._get_payload()
 
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
-    def fiat_withdraw_history(self, p=1, lmt=1):
+    def fiat_withdraw_history(self, p=1, lmt=10):
         url = self._get_path("FIAT_WITHDRAW_HISTORY", p=p, lmt=lmt)
         payload = self._get_payload()
 

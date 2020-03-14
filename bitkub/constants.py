@@ -19,7 +19,7 @@ ENDPOINTS = {
     "MARKET_MY_OPEN_ORDERS": "/api/market/my-open-orders",
     "MARKET_MY_ORDER_HISTORY": "/api/market/my-order-history",
     "MARKET_ORDER_INFO": "/api/market/order-info",
-    "CRYPTO_ADDRESSES": "/api/crypto/addresses",
+    "CRYPTO_ADDRESSES": "/api/crypto/addresses?p={p}&lmt={lmt}",
     "CRYPTO_WITHDRAW": "/api/crypto/withdraw",
     "CRYPTO_DEPOSIT_HISTORY": "/api/crypto/deposit-history?p={p}&lmt={lmt}",
     "CRYPTO_WITHDRAW_HISTORY": "/api/crypto/withdraw-history?p={p}&lmt={lmt}",
