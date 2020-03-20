@@ -1,15 +1,17 @@
-import pypandoc
-
 from setuptools import setup
 
 
-long_description = pypandoc.convert('README.md', 'rst')
+def readme():
+    with open('README.md') as f:
+        return f.read()
+
 
 setup(
     name='bitkub',
-    version='1.0.0',
+    version='1.0.2',
     description='A Python library for Bitkub API',
-    long_description=long_description,
+    long_description=readme(),
+    long_description_content_type="text/markdown",
     url='https://github.com/sang-sakarin/bitkub',
     author='sang_sakarin',
     author_email='sang_sakarin@outlook.com',
