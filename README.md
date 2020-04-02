@@ -5,7 +5,7 @@
 A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-docs) API
 
 ## Releases
-  * ```2020-04-01``` add [generate-address](#cryptoaddressses) method
+  * ```2020-04-02``` version ```1.0.3``` add [generate-address](#cryptogenerateaddress) method
 
 ## Table of Contents
 
