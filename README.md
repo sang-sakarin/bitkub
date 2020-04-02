@@ -4,6 +4,9 @@
 
 A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-docs) API
 
+## Releases
+  * ```2020-04-01``` add [generate-address](#cryptoaddressses) method
+
 ## Table of Contents
 
 - [Installation](#installation)
@@ -32,6 +35,7 @@ A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-
   - [Crypto withdraw](#cryptowithdraw)
   - [Crypto deposit history](#cryptodeposithistory)
   - [Crypto withdraw history](#cryptowithdrawhistory)
+  - [Crypto generate address](#cryptogenerateaddress)
   - [Fiat accounts](#fiataccounts)
   - [Fiat withdraw](#fiatwithdraw)
   - [Fiat deposit history](#fiatdeposithistory)
@@ -74,7 +78,6 @@ You can find API KEY and API SECRET from [here](https://www.bitkub.com/publicapi
 
 ### Viewing status <a name="viewingstatus"></a>
 
-#### Description:
 Get endpoint status.
 
 #### Function:
@@ -97,7 +100,6 @@ Get endpoint status.
 
 ### Viewing servertime <a name="viewingservertime"></a>
 
-#### Description:
 Get server timestamp.
 
 #### Function:
@@ -109,7 +111,6 @@ Get server timestamp.
 
 ### Viewing symbols <a name="viewingsymbols"></a>
 
-#### Description:
 List all available symbols.
 
 #### Function:
@@ -135,7 +136,6 @@ List all available symbols.
 
 ### Viewing ticker <a name="viewingticker"></a>
 
-#### Description:
 Get ticker information.
 
 #### Function:
@@ -167,7 +167,6 @@ Get ticker information.
 
 ### Viewing trades <a name="viewingtrades"></a>
 
-#### Description:
 List recent trades.
 
 #### Function:
@@ -201,7 +200,6 @@ List recent trades.
 
 ### Viewing bids <a name="viewingbids"></a>
 
-#### Description:
 List open buy orders.
 
 #### Function:
@@ -237,7 +235,6 @@ List open buy orders.
 
 ### Viewing asks <a name="viewingasks"></a>
 
-#### Description:
 List open sell orders.
 
 #### Function:
@@ -272,7 +269,6 @@ List open sell orders.
 
 ### Viewing books <a name="viewingbooks"></a>
 
-#### Description:
 List all open orders.
 
 #### Function:
@@ -311,7 +307,6 @@ List all open orders.
 
 ### Viewing depth <a name="viewingdepth"></a>
 
-#### Description:
 Get depth information.
 
 #### Function:
@@ -341,9 +336,7 @@ Get depth information.
 
 ### Viewing wallet <a name="viewingwallet"></a>
 
-#### Description:
-Get user available balances.
-```Required initial secure obj```
+Get user available balances. ```Required initial secure obj```
 
 #### Function:
     bitkub.wallet()
@@ -362,9 +355,7 @@ Get user available balances.
 
 ### Viewing balances <a name="viewingbalances"></a>
 
-#### Description:
-Get balances info: this includes both available and reserved balances.
-```Required initial secure obj```
+Get balances info: this includes both available and reserved balances. ```Required initial secure obj```
 
 #### Function:
     bitkub.balances()
@@ -388,9 +379,7 @@ Get balances info: this includes both available and reserved balances.
 
 ### Create buy order <a name="createbuyorder"></a>
 
-#### Description:
-Create a buy order.
-```Required initial secure obj```
+Create a buy order. ```Required initial secure obj```
 
 #### Function:
     bitkub.place_bid(sym='THB_BTC', amt=1, rat=1, typ='limit')
@@ -422,9 +411,7 @@ Create a buy order.
 
 ### Create sell order <a name="createsellorder"></a>
 
-#### Description:
-Create a sell order.
-```Required initial secure obj```
+Create a sell order. ```Required initial secure obj```
 
 #### Function:
     bitkub.place_ask(sym='THB_BTC', amt=1, rat=1, typ='limit')
@@ -456,9 +443,7 @@ Create a sell order.
 
 ### Create sell order by fiat <a name="createsellorderfiat"></a>
 
-#### Description:
-Create a sell order by specifying the fiat amount you want to receive (selling amount of cryptocurrency is automatically calculated).
-```Required initial secure obj```
+Create a sell order by specifying the fiat amount you want to receive (selling amount of cryptocurrency is automatically calculated). ```Required initial secure obj```
 
 #### Function:
     bitkub.place_bid(sym='THB_BTC', amt=1, rat=1, typ='limit')
@@ -490,9 +475,7 @@ Create a sell order by specifying the fiat amount you want to receive (selling a
 
 ### Cancel orrder<a name="cancelorder"></a>
 
-#### Description:
-Cancel an open order.
-```Required initial secure obj```
+Cancel an open order. ```Required initial secure obj```
 
 #### Function:
     bitkub.cancel_order(sym='THB_BTC', id=1, sd=1, hash='XXXXXX')
@@ -513,9 +496,7 @@ Cancel an open order.
 
 ### My open orders<a name="myopenorders"></a>
 
-#### Description:
-List all open orders of the given symbol.
-```Required initial secure obj```
+List all open orders of the given symbol. ```Required initial secure obj```
 
 #### Function:
     bitkub.my_open_orders(sym='THB_BTC')
@@ -549,9 +530,7 @@ List all open orders of the given symbol.
 
 ### My order history<a name="myorderhistory"></a>
 
-#### Description:
-List all orders that have already matched.
-```Required initial secure obj```
+List all orders that have already matched. ```Required initial secure obj```
 
 #### Function:
     bitkub.my_open_history(sym='THB_BTC', p=1, lmt=10)
@@ -584,6 +563,11 @@ List all orders that have already matched.
           'amount': 0.00999987,
           'ts': 1531513395
         }
+
+    {
+      'error': 0,
+      'result': {
+          'id': 289,
       ],
       'pagination': {
         'page': 2,
@@ -596,9 +580,7 @@ List all orders that have already matched.
 
 ### Order info<a name="orderinfo"></a>
 
-#### Description:
-Get information regarding the specified order.
-```Required initial secure obj```
+Get information regarding the specified order. ```Required initial secure obj```
 
 #### Function:
     bitkub.order_info(sym='THB_BTC', id=1, sd='buy', hash='XXXXXX')
@@ -642,9 +624,7 @@ Get information regarding the specified order.
 
 ### Crypto addresses<a name="cryptoaddress"></a>
 
-#### Description:
-List all crypto addresses.
-```Required initial secure obj```
+List all crypto addresses. ```Required initial secure obj```
 
 #### Function:
     bitkub.crypto_address(p=1, lmt=1)
@@ -675,9 +655,7 @@ List all crypto addresses.
 
 ### Crypto withdraw<a name="cryptowithdraw"></a>
 
-#### Description:
-Make a withdrawal to a trusted address.
-```Required initial secure obj```
+Make a withdrawal to a trusted address. ```Required initial secure obj```
 
 #### Function:
     bitkub.crypto_withdraw(cur='BTC', amt=0.1, adr='4asyjKw6XScneNvhJTLVHS9XfNYM7VBf8x', mem='')
@@ -707,9 +685,7 @@ Make a withdrawal to a trusted address.
 
 ### Crypto deposit history<a name="cryptodeposithistory"></a>
 
-#### Description:
-List crypto deposit history.
-```Required initial secure obj```
+List crypto deposit history. ```Required initial secure obj```
 
 #### Function:
     bitkub.crypto_deposit_history(p=1, lmt=1)
@@ -742,10 +718,8 @@ List crypto deposit history.
 
 
 ### Crypto withdraw history<a name="cryptowithdrawhistory"></a>
-
-#### Description:
-List crypto withdrawal history.
-```Required initial secure obj```
+:
+List crypto withdrawal history. ```Required initial secure obj```
 
 #### Function:
     bitkub.crypto_withdraw_history(p=1, lmt=1)
@@ -778,11 +752,35 @@ List crypto withdrawal history.
     }
 
 
+### Crypto generate address<a name="cryptogenerateaddress"></a>
+Generate a new crypto address (will replace existing address; previous address can still be used to received funds)
+List all approved bank accounts. ```Required initial secure obj```
+
+#### Function:
+    bitkub.crypto_generate_address(sym='THB_BTC')
+
+#### Parameter:
+  * ```sym``` **string** The symbol
+
+
+#### Response:
+
+    {
+      'error': 0,
+      'result': [
+        {
+           'currency': 'BTC',
+           'address': '0x520165471daa570ab632dd504c6af257bd36edfb',
+           'memo': ''
+        }
+      ]
+    }
+
+
+
 ### Fiat accounts<a name="fiataccounts"></a>
 
-#### Description:
-List all approved bank accounts.
-```Required initial secure obj```
+List all approved bank accounts. ```Required initial secure obj```
 
 #### Function:
     bitkub.fiat_accounts(p=1, lmt=1)
@@ -813,9 +811,7 @@ List all approved bank accounts.
 
 ### Fiat withdraw<a name="fiatwithdraw"></a>
 
-#### Description:
-Make a withdrawal to an approved bank account.
-```Required initial secure obj```
+Make a withdrawal to an approved bank account. ```Required initial secure obj```
 
 #### Function:
     bitkub.fiat_withdraw(id=1, amt=1)
@@ -843,9 +839,7 @@ Make a withdrawal to an approved bank account.
 
 ### Fiat deposit history<a name="fiatdeposithistory"></a>
 
-#### Description:
-List fiat deposit history.
-```Required initial secure obj```
+List fiat deposit history. ```Required initial secure obj```
 
 #### Function:
     bitkub.fiat_deposit_history(p=1, lmt=1)
@@ -877,9 +871,7 @@ List fiat deposit history.
 
 ### Fiat withdraw history<a name="fiatwithdrawhistory"></a>
 
-#### Description:
-List fiat withdrawal history.
-```Required initial secure obj```
+List fiat withdrawal history. ```Required initial secure obj```
 
 #### Function:
     bitkub.fiat_withdraw_history(p=1, lmt=1)
@@ -912,9 +904,7 @@ List fiat withdrawal history.
 
 ### Market wstoken<a name="marketwstoken"></a>
 
-#### Description:
-Get the token for websocket authentication.
-```Required initial secure obj```
+Get the token for websocket authentication. ```Required initial secure obj```
 
 #### Function:
     bitkub.market_wstoken()
@@ -928,9 +918,7 @@ Get the token for websocket authentication.
 
 ### User limits<a name="userlimits"></a>
 
-#### Description:
-Check deposit/withdraw limitations and usage.
-```Required initial secure obj```
+Check deposit/withdraw limitations and usage. ```Required initial secure obj```
 
 #### Function:
     bitkub.user_limits()
@@ -973,9 +961,7 @@ Check deposit/withdraw limitations and usage.
 
 ### User trading-credit<a name="usertradingcredits"></a>
 
-#### Description:
-Check trading credit balance.
-```Required initial secure obj```
+Check trading credit balance. ```Required initial secure obj```
 
 #### Function:
     bitkub.user_trading_credits()
