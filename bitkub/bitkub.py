@@ -206,6 +206,13 @@ class Bitkub:
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
+    def crypto_generate_address(self, sym=''):
+        url = self._get_path("CRYPTO_GENERATE_ADDRESS", sym=sym)
+        payload = self._get_payload()
+
+        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+
+    @check_in_attributes(["api_key", "api_secret"])
     def fiat_accounts(self, p=1, lmt=10):
         url = self._get_path("FIAT_ACCOUNTS", p=p, lmt=lmt)
         payload = self._get_payload()
