@@ -8,7 +8,7 @@ def readme():
 
 setup(
     name='bitkub',
-    version='1.0.3',
+    version='1.0.4',
     description='A Python library for Bitkub API',
     long_description=readme(),
     long_description_content_type="text/markdown",
