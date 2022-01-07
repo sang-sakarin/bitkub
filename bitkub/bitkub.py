@@ -1,5 +1,5 @@
 """
-A libraly that provides a python interface to Bitkub API
+A library that provides a python interface to Bitkub API
 """
 import hashlib
 import hmac
@@ -50,8 +50,7 @@ class Bitkub:
         return timestamp
 
     def _get_payload(self, **kwargs):
-        payload = {}
-        payload["ts"] = self._get_timestamp()
+        payload = {"ts": self._get_timestamp()}
         payload.update(kwargs)
         payload["sig"] = self._get_signature(payload)
         payload = self._json_encode(payload)
@@ -135,10 +134,24 @@ class Bitkub:
 
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
 
+    @check_in_attributes(["api_key", "api_key"])
+    def place_bid_test(self, sym='', amt=1, rat=1, typ='limit', client_id=''):
+        url = self._get_path("MARKET_PLACE_BID_TEST")
+        payload = self._get_payload(sym=sym, amt=amt, rat=rat, typ=typ, client_id=client_id)
+
+        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+
     @check_in_attributes(["api_key", "api_secret"])
     def place_ask(self, sym='', amt=1, rat=1, typ='limit'):
         url = self._get_path("MARKET_PLACE_ASK")
         payload = self._get_payload(sym=sym, amt=amt, rat=rat, typ=typ)
+
+        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+
+    @check_in_attributes(["api_key", "api_secret"])
+    def place_ask_test(self, sym='', amt=1, rat=1, typ='limit', client_id=''):
+        url = self._get_path("MARKET_PLACE_ASK_TEST")
+        payload = self._get_payload(sym=sym, amt=amt, rat=rat, typ=typ, client_id=client_id)
 
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
 

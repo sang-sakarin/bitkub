@@ -5,3 +5,8 @@ bitkub.egg-info
 dist/
 
 .env
+
+/venv
+
+.idea
+
