@@ -5,6 +5,12 @@
 A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-docs) API
 
 ## Releases
+  * ```2020-01-07``` version ```x.x.x```
+    * add [Create buy order test](#createbuyordertest)
+    * add [Create sell order test](#createsellordertest)
+    * [Viewing tradingview history](#viewingtradingviewhistory) endpoint is now deprecated and will be updated with a new endpoint soon. The old endpoint will always return empty result.
+    * include is_maker in [My order history](#myorderhistory)
+    * Removed address and instead include from_address and to_address in [Crypto deposit history](#cryptodeposithistory)
   * ```2020-04-02``` version ```1.0.3``` add [generate-address](#cryptogenerateaddress) method
 
 ## Table of Contents
@@ -679,6 +685,7 @@ List all orders that have already matched. ```Required initial secure obj```
           'parent_order_id': 0,
           'super_order_id': 0,
           'taken_by_me': true,
+          'is_maker': true,
           'side': 'buy',
           'type': 'limit',
           'rate': 13335.57,
@@ -828,7 +835,8 @@ List crypto deposit history. ```Required initial secure obj```
            'hash': 'XRPWD0000100276',
            'currency': 'XRP',
            'amount': 5.75111474,
-           'address': null,
+           'from_address': 'sender address',
+           'to_address': 'receipent address',
            'confirmations': 1,
            'status': 'complete',
            'time': 1570893867
