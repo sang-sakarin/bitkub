@@ -1,16 +1,17 @@
 # Bitkub Python
 
 
-
 A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-docs) API
 
 ## Releases
-  * ```2020-01-07``` version ```x.x.x```
+  * ```2020-01-07``` version ```1.1.0```
     * add [Create buy order test](#createbuyordertest)
     * add [Create sell order test](#createsellordertest)
     * [Viewing tradingview history](#viewingtradingviewhistory) endpoint is now deprecated and will be updated with a new endpoint soon. The old endpoint will always return empty result.
     * include is_maker in [My order history](#myorderhistory)
-    * Removed address and instead include from_address and to_address in [Crypto deposit history](#cryptodeposithistory)
+    * removed address and instead include from_address and to_address in [Crypto deposit history](#cryptodeposithistory)
+    * add [Crypto internal withdraw](#cryptinternalowithdraw)
+    * include partial_filled and remaining in [Order info](#orderinfo)
   * ```2020-04-02``` version ```1.0.3``` add [generate-address](#cryptogenerateaddress) method
 
 ## Table of Contents
@@ -42,6 +43,7 @@ A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-
   - [Order info](#orderinfo)
   - [Crypto addresses](#cryptoaddressses)
   - [Crypto withdraw](#cryptowithdraw)
+  - [Crypto internal withdraw](#cryptinternalowithdraw)
   - [Crypto deposit history](#cryptodeposithistory)
   - [Crypto withdraw history](#cryptowithdrawhistory)
   - [Crypto generate address](#cryptogenerateaddress)
@@ -739,6 +741,8 @@ Get information regarding the specified order. ```Required initial secure obj```
           'filled': 3999.97,
           'total': 4000,
           'status': 'filled',
+          'partial_filled': False,
+          'remaining': 0,
           'history': [
             {
                 'amount': 98.14848,
@@ -790,6 +794,38 @@ Make a withdrawal to a trusted address. ```Required initial secure obj```
 
 #### Function:
     bitkub.crypto_withdraw(cur='BTC', amt=0.1, adr='4asyjKw6XScneNvhJTLVHS9XfNYM7VBf8x', mem='')
+
+#### Parameter:
+  * ```cur``` **string** Currency for withdrawal (e.g. BTC, ETH)
+  * ```amt``` **float** Amount you want to withdraw
+  * ```adr``` **string** Address to which you want to withdraw
+  * ```mem``` **string** (Optional) Memo or destination tag to which you want to withdraw
+
+
+#### Response:
+
+    {
+      'error': 0,
+      'result': {
+          'txn': 'BTCWD0000012345',
+          'adr': '4asyjKw6XScneNvhJTLVHS9XfNYM7VBf8x'
+          'mem': '',
+          'cur': 'BTC',
+          'amt': 0.1,
+          'fee': 0.0002,
+          'ts': 1569999999
+      }
+    }
+
+
+### Crypto internal withdraw<a name="cryptointernalwithdraw"></a>
+
+Make a withdrawal to a trusted address. ```Required initial secure obj```
+
+The destination address is not required to be a trusted address. This API is not enabled by default, Only KYB users can request this feature by contacting us via support@bitkub.com
+
+#### Function:
+    bitkub.crypto_internal_withdraw(cur='BTC', amt=0.1, adr='4asyjKw6XScneNvhJTLVHS9XfNYM7VBf8x', mem='')
 
 #### Parameter:
   * ```cur``` **string** Currency for withdrawal (e.g. BTC, ETH)

@@ -205,6 +205,13 @@ class Bitkub:
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
+    def crypto_internal_withdraw(self, cur='', amt=0, adr='', mem=''):
+        url = self._get_path("CRYPTO_INTERNAL_WITHDRAW")
+        payload = self._get_payload(cur=cur, amt=amt, adr=adr, mem=mem)
+
+        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+
+    @check_in_attributes(["api_key", "api_secret"])
     def crypto_deposit_history(self, p=1, lmt=10):
         url = self._get_path("CRYPTO_DEPOSIT_HISTORY", p=p, lmt=lmt)
         payload = self._get_payload()
