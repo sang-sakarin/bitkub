@@ -4,7 +4,7 @@
 A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-docs) API
 
 ## Releases
-  * ```2020-01-07``` version ```1.1.0```
+  * ```2022-01-07``` version ```1.1.0```
     * add [Create buy order test](#createbuyordertest)
     * add [Create sell order test](#createsellordertest)
     * [Viewing tradingview history](#viewingtradingviewhistory) endpoint is now deprecated and will be updated with a new endpoint soon. The old endpoint will always return empty result.
