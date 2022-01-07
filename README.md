@@ -22,6 +22,7 @@ A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-
   - [Viewing asks](#viewingasks)
   - [Viewing books](#viewingbooks)
   - [Viewing depth](#viewingdepth)
+  - [Viewing tradingview history](#viewingtradingviewhistory)
   - [Viewing wallet](#viewingwallet)
   - [Viewing balances](#viewingbalances)
   - [Create buy order](#createbuyorder)
@@ -332,6 +333,62 @@ Get depth information.
           277936.27,
           0.94071896
         ]
+      ]
+    }
+
+
+### Viewing tradingview history <a name="viewingtradingviewhistory"></a>
+
+Get historical data for TradingView chart.
+
+#### Function:
+    bitkub.tradingview(sym='THB_BTC', int=1, frm='', to='')
+#### Parameter:
+
+  * ```sym``` **string** The symbol
+  * ```int``` **int** Chart resolution (1, 5, 15, 60, 240, 1D) ```default``` 1
+  * ```frm``` **int** Timestamp of the starting time
+  * ```to``` **int** Timestamp of the ending time
+
+#### Response:
+    
+    {
+      'c': [
+        1685000,
+        1680699.95,
+        1688998.99,
+        1692222.22
+      ],
+      'h': [
+        1685000,
+        1685000,
+        1689000,
+        1692222.22
+      ],
+      'l': [
+        1680053.22,
+        1671000,
+        1680000,
+        1684995.07
+      ],
+      'o': [
+        1682500,
+        1685000,
+        1680100,
+        1684995.07
+      ],
+      's': "ok",
+      't': [
+        1633424400,
+        1633425300,
+        1633426200,
+        1633427100
+      ],
+      'v': [
+        4.604352630000001,
+        8.530631670000005,
+        4.836581560000002,
+        2.8510189200000022
       ]
     }
 
