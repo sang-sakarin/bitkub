@@ -34,4 +34,8 @@ ENDPOINTS = {
     "MARKET_WSTOKEN": "/api/market/wstoken",
     "USER_LIMITS": "/api/user/limits",
     "USER_TRADING_CREDITS": "/api/user/trading-credits",
+    "MARKET_PLACE_BID": "/api/market/v2/place-bid",
+    "MARKET_PLACE_ASK": "/api/market/v2/place-ask",
+    "MARKET_CANCEL_ORDER": "/api/market/v2/cancel-order",
+
 }

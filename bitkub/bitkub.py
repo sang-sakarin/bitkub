@@ -280,3 +280,24 @@ class Bitkub:
         payload = self._get_payload()
 
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+
+    @check_in_attributes(["api_key", "api_secret"])
+    def place_bid_v2(self, sym='', amt=1, rat=1, typ='limit', client_id=''):
+        url = self._get_path("MARKET_PLACE_BID")
+        payload = self._get_payload(sym=sym, amt=amt, rat=rat, typ=typ, client_id=client_id)
+
+        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+
+    @check_in_attributes(["api_key", "api_secret"])
+    def place_ask_v2(self, sym='', amt=1, rat=1, typ='limit', client_id=''):
+        url = self._get_path("MARKET_PLACE_ASK")
+        payload = self._get_payload(sym=sym, amt=amt, rat=rat, typ=typ, client_id=client_id)
+
+        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+
+    @check_in_attributes(["api_key", "api_secret"])
+    def cancel_order_v2(self, sym='', id='', sd='buy', hash=''):
+        url = self._get_path("MARKET_CANCEL_ORDER")
+        payload = self._get_payload(sym=sym, id=id, sd=sd, hash=hash)
+
+        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
