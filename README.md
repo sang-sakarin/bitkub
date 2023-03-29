@@ -580,7 +580,9 @@ Create a sell order test. ```Required initial secure obj```
     }
 
 
-### Create sell order by fiat <a name="createsellorderfiat"></a> <span style="color:white;background:red;"> ⚠️ This API is <strong style="color:yellow;">deprecated.</strong> </span>
+### Create sell order by fiat <a name="createsellorderfiat"></a>
+<span style="color:white;background:red;"> ⚠️ This API is <strong style="color:yellow;">deprecated.</strong> (2023-03-27) </span>
+
 Create a sell order by specifying the fiat amount you want to receive (selling amount of cryptocurrency is automatically calculated). ```Required initial secure obj```
 
 #### Function:
