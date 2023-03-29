@@ -8,7 +8,7 @@ bitkub = Bitkub()
 bitkub.set_api_key(API_KEY)
 bitkub.set_api_secret(API_SECRET)
 
-coin_name = 'BTC'
+coin_name = 'DOGE'
 symbol = f'THB_{coin_name}'
 amountTHB = 15.00
 
@@ -50,3 +50,12 @@ time.sleep(5)
 balance = bitkub.balances()
 symbol_balance = balance['result'][coin_name]['available']
 print(f'Balance: {symbol_balance}')
+
+
+# print(bitkub.crypto_generate_address(sym=symbol))
+# print(bitkub.crypto_address())
+# print(bitkub.crypto_deposit_history())
+# print(bitkub.crypto_withdraw_history())
+# print(bitkub.fiat_accounts())
+# print(bitkub.fiat_deposit_history())
+# print(bitkub.fiat_withdraw_history())

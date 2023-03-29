@@ -193,8 +193,8 @@ class Bitkub:
 
     @check_in_attributes(["api_key", "api_secret"])
     def crypto_address(self, p=1, lmt=10):
-        url = self._get_path("CRYPTO_ADDRESSES", p=p, lmt=lmt)
-        payload = self._get_payload()
+        url = self._get_path("CRYPTO_ADDRESSES")
+        payload = self._get_payload(p=p, lmt=lmt)
 
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
 
@@ -214,29 +214,29 @@ class Bitkub:
 
     @check_in_attributes(["api_key", "api_secret"])
     def crypto_deposit_history(self, p=1, lmt=10):
-        url = self._get_path("CRYPTO_DEPOSIT_HISTORY", p=p, lmt=lmt)
-        payload = self._get_payload()
+        url = self._get_path("CRYPTO_DEPOSIT_HISTORY")
+        payload = self._get_payload(p=p, lmt=lmt)
 
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
     def crypto_withdraw_history(self, p=1, lmt=10):
-        url = self._get_path("CRYPTO_WITHDRAW_HISTORY", p=p, lmt=lmt)
-        payload = self._get_payload()
+        url = self._get_path("CRYPTO_WITHDRAW_HISTORY")
+        payload = self._get_payload(p=p, lmt=lmt)
 
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
     def crypto_generate_address(self, sym=''):
-        url = self._get_path("CRYPTO_GENERATE_ADDRESS", sym=sym)
-        payload = self._get_payload()
+        url = self._get_path("CRYPTO_GENERATE_ADDRESS")
+        payload = self._get_payload(sym=sym)
 
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
     def fiat_accounts(self, p=1, lmt=10):
-        url = self._get_path("FIAT_ACCOUNTS", p=p, lmt=lmt)
-        payload = self._get_payload()
+        url = self._get_path("FIAT_ACCOUNTS")
+        payload = self._get_payload(p=p, lmt=lmt)
 
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
 
@@ -249,15 +249,15 @@ class Bitkub:
 
     @check_in_attributes(["api_key", "api_secret"])
     def fiat_deposit_history(self, p=1, lmt=10):
-        url = self._get_path("FIAT_DEPOSIT_HISTORY", p=p, lmt=lmt)
-        payload = self._get_payload()
+        url = self._get_path("FIAT_DEPOSIT_HISTORY")
+        payload = self._get_payload(p=p, lmt=lmt)
 
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
     def fiat_withdraw_history(self, p=1, lmt=10):
-        url = self._get_path("FIAT_WITHDRAW_HISTORY", p=p, lmt=lmt)
-        payload = self._get_payload()
+        url = self._get_path("FIAT_WITHDRAW_HISTORY")
+        payload = self._get_payload(p=p, lmt=lmt)
 
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
 
