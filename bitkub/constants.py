@@ -12,12 +12,12 @@ ENDPOINTS = {
     "MARKET_DEPTH_PATH": "/api/market/depth?sym={sym}&lmt={lmt}",
     "MARKET_WALLET": "/api/market/wallet",
     "MARKET_BALANCES": "/api/market/balances",
-    "MARKET_PLACE_BID": "/api/market/place-bid",
+    # "MARKET_PLACE_BID": "/api/market/place-bid", # 2023-03-27 Deprecated
     "MARKET_PLACE_BID_TEST": "/api/market/place-bid/test",
-    "MARKET_PLACE_ASK": "/api/market/place-ask",
+    # "MARKET_PLACE_ASK": "/api/market/place-ask", # 2023-03-27 Deprecated
     "MARKET_PLACE_ASK_TEST": "/api/market/place-ask/test",
-    "MARKET_PLACE_ASK_BY_FIAT": "/api/market/place-ask-by-fiat",
-    "MARKET_CANCEL_ORDER": "/api/market/cancel-order",
+    # "MARKET_PLACE_ASK_BY_FIAT": "/api/market/place-ask-by-fiat", # 2023-03-27 Deprecated
+    # "MARKET_CANCEL_ORDER": "/api/market/cancel-order", # 2023-03-27 Deprecated
     "MARKET_MY_OPEN_ORDERS": "/api/market/my-open-orders",
     "MARKET_MY_ORDER_HISTORY": "/api/market/my-order-history",
     "MARKET_ORDER_INFO": "/api/market/order-info",
@@ -34,4 +34,7 @@ ENDPOINTS = {
     "MARKET_WSTOKEN": "/api/market/wstoken",
     "USER_LIMITS": "/api/user/limits",
     "USER_TRADING_CREDITS": "/api/user/trading-credits",
+    "MARKET_V2_PLACE_BID": "/api/market/v2/place-bid",
+    "MARKET_V2_PLACE_ASK": "/api/market/v2/place-ask",
+    "MARKET_V2_CANCEL_ORDER": "/api/market/v2/cancel-order",
 }
