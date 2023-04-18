@@ -1,14 +1,14 @@
 from bitkub import Bitkub
 import time
 
-API_KEY = "xxxxx"
-API_SECRET = "xxxxx"
+API_KEY = ""
+API_SECRET = ""
 
 bitkub = Bitkub()
 bitkub.set_api_key(API_KEY)
 bitkub.set_api_secret(API_SECRET)
 
-coin_name = 'DOGE'
+coin_name = 'BTC'
 symbol = f'THB_{coin_name}'
 amountTHB = 15.00
 
@@ -39,9 +39,13 @@ symbol_balance = balance['result'][coin_name]['available']
 print(f'Balance: {symbol_balance}')
 
 # sell order
+# sell_order = bitkub.place_ask(sym=symbol, amt=symbol_balance, rat=bid_price)
+# print(f'Sell order: {sell_order}')
+
+# sell order by fiat
 coinTHB = symbol_balance*bid_price
-sell_order = bitkub.place_ask(sym=symbol, amt=symbol_balance, rat=bid_price)
-print(f'Sell order: {sell_order}')
+sell_order = bitkub.place_ask_by_fiat(sym=symbol, amt=coinTHB, rat=bid_price)
+print(f'Sell order by fiat: {sell_order}')
 
 # wait 5 seconds for order to be filled
 time.sleep(5)

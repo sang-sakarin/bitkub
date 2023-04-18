@@ -156,12 +156,10 @@ class Bitkub:
         return basic_request('POST', url, headers=self._get_headers(), payload=payload)
 
     # 2023-03-27 Deprecated
-    # @check_in_attributes(["api_key", "api_secret"])
-    # def place_ask_by_fiat(self, sym='', amt=1, rat=1, typ='limit'):
-    #     url = self._get_path("MARKET_PLACE_ASK_BY_FIAT")
-    #     payload = self._get_payload(sym=sym, amt=amt, rat=rat, typ=typ)
-
-    #     return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+    @check_in_attributes(["api_key", "api_secret"])
+    def place_ask_by_fiat(self, sym='', amt=1, rat=1, typ='limit', client_id=''):
+        coin_amt = amt/rat
+        return self.place_ask(sym=sym, amt=coin_amt, rat=rat, typ=typ, client_id=client_id)
 
     @check_in_attributes(["api_key", "api_secret"])
     def cancel_order(self, sym='', id='', sd='buy', hash=''):
