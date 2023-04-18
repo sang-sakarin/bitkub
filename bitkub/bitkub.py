@@ -158,7 +158,7 @@ class Bitkub:
     # 2023-03-27 Deprecated
     @check_in_attributes(["api_key", "api_secret"])
     def place_ask_by_fiat(self, sym='', amt=1, rat=1, typ='limit', client_id=''):
-        coin_amt = amt/rat
+        coin_amt = amt/rat if rat > 0 else amt
         return self.place_ask(sym=sym, amt=coin_amt, rat=rat, typ=typ, client_id=client_id)
 
     @check_in_attributes(["api_key", "api_secret"])
