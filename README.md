@@ -61,7 +61,7 @@ A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-
 
 ## Installation <a name="installation"></a>
 
-    pip install bitkub
+    pip install bitkub-v2
 
 ## Usage <a name="usage"></a>
 
