@@ -69,11 +69,6 @@ class BitkubTest(TestCase):
         # print(self.bitkub.place_ask(sym='THB_BTC'))
         self.assertTrue(True)
 
-    # 2023-03-27 Deprecated
-    # def test_place_ask_by_fiat(self):
-    #     # print(self.bitkub.place_ask_by_fiat(sym='THB_BTC'))
-    #     self.assertTrue(True)
-
     def test_cancel_order(self):
         # print(self.bitkub.cancel_order(sym='THB_BTC', id=1, sd='buy', hash='123'))
         self.assertTrue(True)

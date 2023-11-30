@@ -4,7 +4,9 @@
 A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-docs) API
 
 ## Releases
-  * ```2023-03-29``` version ```1.2.0```
+  * ```2023-11-29``` version ```3.1.0```
+    * swicth to api v3 
+  * ```2023-03-29``` version ```2.1.0```
     * swicth to api v2 in [Create buy order](#createbuyorder), [Create sell order](#createsellorder) and [Cancel order](#cancelorder) 
     * remove [Create sell order by fiat](#createsellorderfiat), Deprecated at 2023-03-27
   * ```2022-01-07``` version ```1.1.0```
@@ -121,7 +123,7 @@ Get server timestamp.
 
 #### Response:
 
-    1583051817
+    1701251212273
 
 ### Viewing symbols <a name="viewingsymbols"></a>
 
@@ -481,6 +483,7 @@ Create a buy order. ```Required initial secure obj```
     }
 
 ### Create buy order test <a name="createbuyordertest"></a>
+<span style="color:white;background:red;"> ⚠️ This API is <strong style="color:yellow;">deprecated.</strong> (2023-11-29) </span>
 
 Create a buy order test. ```Required initial secure obj```
 
@@ -548,6 +551,7 @@ Create a sell order. ```Required initial secure obj```
 
 
 ### Create sell order test <a name="createsellordertest"></a>
+<span style="color:white;background:red;"> ⚠️ This API is <strong style="color:yellow;">deprecated.</strong> (2023-11-29) </span>
 
 Create a sell order test. ```Required initial secure obj```
 

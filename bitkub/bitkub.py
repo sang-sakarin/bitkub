@@ -29,17 +29,20 @@ class Bitkub:
     def _json_encode(self, payload):
         return json.dumps(payload, separators=(',', ':'), sort_keys=True)
 
-    def _get_headers(self):
+    def _get_headers(self, ts='', sig=''):
         headers = {
             "ACCEPT": "application/json",
             "CONTENT-TYPE": "application/json",
-            "X-BTK-APIKEY": "{0}".format(self.api_key)
+            "X-BTK-TIMESTAMP": "{0}".format(ts),
+            "X-BTK-APIKEY": "{0}".format(self.api_key),
+            "X-BTK-SIGN": "{0}".format(sig)
         }
 
         return headers
-
-    def _get_signature(self, payload):
-        message = self._json_encode(payload)
+    
+    def _get_signature(self, method, ts, url, payload=''):
+        url_path = url.replace(self.API_ROOT, '')
+        message = f"{ts}{method}{url_path}" + payload
         signature = hmac.new(self._get_api_secret(), msg=message.encode(), digestmod=hashlib.sha256).hexdigest()
 
         return signature
@@ -50,9 +53,11 @@ class Bitkub:
         return timestamp
 
     def _get_payload(self, **kwargs):
-        payload = {"ts": self._get_timestamp()}
+        payload = {}
+        # payload = {"ts": self._get_timestamp()}
+        # payload = {"ts": self.servertime()}
         payload.update(kwargs)
-        payload["sig"] = self._get_signature(payload)
+        # payload["sig"] = self._get_signature(payload)
         payload = self._json_encode(payload)
 
         return payload
@@ -117,45 +122,50 @@ class Bitkub:
     def wallet(self):
         url = self._get_path("MARKET_WALLET")
         payload = self._get_payload()
+        ts = self.servertime()
+        sig = self._get_signature('POST', ts, url, payload)
 
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+        return basic_request('POST', url, headers=self._get_headers(ts, sig), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
     def balances(self):
         url = self._get_path("MARKET_BALANCES")
         payload = self._get_payload()
+        ts = self.servertime()
+        sig = self._get_signature('POST', ts, url, payload)
 
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+        return basic_request('POST', url, headers=self._get_headers(ts, sig), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
     def place_bid(self, sym='', amt=1, rat=1, typ='limit', client_id=''):
-        url = self._get_path("MARKET_V2_PLACE_BID")
+        url = self._get_path("MARKET_PLACE_BID")
         payload = self._get_payload(sym=sym, amt=amt, rat=rat, typ=typ, client_id=client_id)
+        ts = self.servertime()
+        sig = self._get_signature('POST', ts, url, payload)
+        
+        return basic_request('POST', url, headers=self._get_headers(ts, sig), payload=payload)
 
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
-
-    @check_in_attributes(["api_key", "api_key"])
+    # 2023-11-29 Deprecated
     def place_bid_test(self, sym='', amt=1, rat=1, typ='limit', client_id=''):
-        url = self._get_path("MARKET_PLACE_BID_TEST")
-        payload = self._get_payload(sym=sym, amt=amt, rat=rat, typ=typ, client_id=client_id)
 
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+        return None
 
     @check_in_attributes(["api_key", "api_secret"])
     def place_ask(self, sym='', amt=1, rat=1, typ='limit', client_id=''):
-        url = self._get_path("MARKET_V2_PLACE_ASK")
+        url = self._get_path("MARKET_PLACE_ASK")
         payload = self._get_payload(sym=sym, amt=amt, rat=rat, typ=typ, client_id=client_id)
+        ts = self.servertime()
+        sig = self._get_signature('POST', ts, url, payload)
+        
+        return basic_request('POST', url, headers=self._get_headers(ts, sig), payload=payload)
 
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
-
-    @check_in_attributes(["api_key", "api_secret"])
+    # 2023-11-29 Deprecated
     def place_ask_test(self, sym='', amt=1, rat=1, typ='limit', client_id=''):
-        url = self._get_path("MARKET_PLACE_ASK_TEST")
-        payload = self._get_payload(sym=sym, amt=amt, rat=rat, typ=typ, client_id=client_id)
 
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+        return None
 
     # 2023-03-27 Deprecated
+    # mapping function form place_ask_by_fiat to place_ask
     @check_in_attributes(["api_key", "api_secret"])
     def place_ask_by_fiat(self, sym='', amt=1, rat=1, typ='limit', client_id=''):
         coin_amt = amt/rat if rat > 0 else amt
@@ -163,119 +173,150 @@ class Bitkub:
 
     @check_in_attributes(["api_key", "api_secret"])
     def cancel_order(self, sym='', id='', sd='buy', hash=''):
-        url = self._get_path("MARKET_V2_CANCEL_ORDER")
+        url = self._get_path("MARKET_CANCEL_ORDER")
         payload = self._get_payload(sym=sym, id=id, sd=sd, hash=hash)
-
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+        ts = self.servertime()
+        sig = self._get_signature('POST', ts, url, payload)
+        
+        return basic_request('POST', url, headers=self._get_headers(ts, sig), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
     def my_open_orders(self, sym=''):
-        url = self._get_path("MARKET_MY_OPEN_ORDERS")
-        payload = self._get_payload(sym=sym)
-
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+        url = self._get_path("MARKET_MY_OPEN_ORDERS", sym=sym)
+        ts = self.servertime()
+        sig = self._get_signature('GET', ts, url)
+        
+        return basic_request('GET', url, headers=self._get_headers(ts, sig))
 
     @check_in_attributes(["api_key", "api_secret"])
     def my_open_history(self, sym='', p=1, lmt=10, start=None, end=None):
-        url = self._get_path("MARKET_MY_ORDER_HISTORY")
-        payload = self._get_payload(sym=sym, p=p, lmt=lmt, start=start, end=end)
-
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+        url = self._get_path("MARKET_MY_ORDER_HISTORY", sym=sym, p=p, lmt=lmt, start=start, end=end)
+        ts = self.servertime()
+        sig = self._get_signature('GET', ts, url)
+        
+        return basic_request('GET', url, headers=self._get_headers(ts, sig))
 
     @check_in_attributes(["api_key", "api_secret"])
     def order_info(self, sym='', id=None, sd='buy', hash=''):
-        url = self._get_path("MARKET_ORDER_INFO")
-        payload = self._get_payload(sym=sym, id=id, sd=sd, hash=hash)
-
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+        url = self._get_path("MARKET_ORDER_INFO", sym=sym, id=id, sd=sd, hash=hash)
+        ts = self.servertime()
+        sig = self._get_signature('POST', ts, url)
+        
+        return basic_request('POST', url, headers=self._get_headers(ts, sig))
 
     @check_in_attributes(["api_key", "api_secret"])
     def crypto_address(self, p=1, lmt=10):
         url = self._get_path("CRYPTO_ADDRESSES")
         payload = self._get_payload(p=p, lmt=lmt)
-
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+        ts = self.servertime()
+        sig = self._get_signature('POST', ts, url, payload)
+        
+        return basic_request('POST', url, headers=self._get_headers(ts, sig), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
     def crypto_withdraw(self, cur='', amt=0, adr='', mem=''):
         url = self._get_path("CRYPTO_WITHDRAW")
         payload = self._get_payload(cur=cur, amt=amt, adr=adr, mem=mem)
-
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+        ts = self.servertime()
+        sig = self._get_signature('POST', ts, url, payload)
+        
+        return basic_request('POST', url, headers=self._get_headers(ts, sig), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
     def crypto_internal_withdraw(self, cur='', amt=0, adr='', mem=''):
         url = self._get_path("CRYPTO_INTERNAL_WITHDRAW")
         payload = self._get_payload(cur=cur, amt=amt, adr=adr, mem=mem)
-
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+        ts = self.servertime()
+        sig = self._get_signature('POST', ts, url, payload)
+        
+        return basic_request('POST', url, headers=self._get_headers(ts, sig), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
     def crypto_deposit_history(self, p=1, lmt=10):
         url = self._get_path("CRYPTO_DEPOSIT_HISTORY")
         payload = self._get_payload(p=p, lmt=lmt)
-
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+        ts = self.servertime()
+        sig = self._get_signature('POST', ts, url, payload)
+        
+        return basic_request('POST', url, headers=self._get_headers(ts, sig), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
     def crypto_withdraw_history(self, p=1, lmt=10):
         url = self._get_path("CRYPTO_WITHDRAW_HISTORY")
         payload = self._get_payload(p=p, lmt=lmt)
-
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+        ts = self.servertime()
+        sig = self._get_signature('POST', ts, url, payload)
+        
+        return basic_request('POST', url, headers=self._get_headers(ts, sig), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
     def crypto_generate_address(self, sym=''):
         url = self._get_path("CRYPTO_GENERATE_ADDRESS")
         payload = self._get_payload(sym=sym)
-
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+        ts = self.servertime()
+        sig = self._get_signature('POST', ts, url, payload)
+        
+        return basic_request('POST', url, headers=self._get_headers(ts, sig), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
     def fiat_accounts(self, p=1, lmt=10):
         url = self._get_path("FIAT_ACCOUNTS")
         payload = self._get_payload(p=p, lmt=lmt)
-
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+        ts = self.servertime()
+        sig = self._get_signature('POST', ts, url, payload)
+        
+        return basic_request('POST', url, headers=self._get_headers(ts, sig), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
     def fiat_withdraw(self, id='', amt=0):
         url = self._get_path("FIAT_WITHDRAW")
         payload = self._get_payload(id=id, amt=amt)
-
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+        ts = self.servertime()
+        sig = self._get_signature('POST', ts, url, payload)
+        
+        return basic_request('POST', url, headers=self._get_headers(ts, sig), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
     def fiat_deposit_history(self, p=1, lmt=10):
         url = self._get_path("FIAT_DEPOSIT_HISTORY")
         payload = self._get_payload(p=p, lmt=lmt)
-
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+        ts = self.servertime()
+        sig = self._get_signature('POST', ts, url, payload)
+        
+        return basic_request('POST', url, headers=self._get_headers(ts, sig), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
     def fiat_withdraw_history(self, p=1, lmt=10):
         url = self._get_path("FIAT_WITHDRAW_HISTORY")
         payload = self._get_payload(p=p, lmt=lmt)
-
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+        ts = self.servertime()
+        sig = self._get_signature('POST', ts, url, payload)
+        
+        return basic_request('POST', url, headers=self._get_headers(ts, sig), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
     def market_wstoken(self):
         url = self._get_path("MARKET_WSTOKEN")
         payload = self._get_payload()
-
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+        ts = self.servertime()
+        sig = self._get_signature('POST', ts, url, payload)
+        
+        return basic_request('POST', url, headers=self._get_headers(ts, sig), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
     def user_limits(self):
         url = self._get_path("USER_LIMITS")
         payload = self._get_payload()
-
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+        ts = self.servertime()
+        sig = self._get_signature('POST', ts, url, payload)
+        
+        return basic_request('POST', url, headers=self._get_headers(ts, sig), payload=payload)
 
     @check_in_attributes(["api_key", "api_secret"])
     def user_trading_credits(self):
         url = self._get_path("USER_TRADING_CREDITS")
         payload = self._get_payload()
-
-        return basic_request('POST', url, headers=self._get_headers(), payload=payload)
+        ts = self.servertime()
+        sig = self._get_signature('POST', ts, url, payload)
+        
+        return basic_request('POST', url, headers=self._get_headers(ts, sig), payload=payload)
