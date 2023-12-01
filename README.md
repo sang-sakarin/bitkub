@@ -4,7 +4,7 @@
 A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-docs) API
 
 ## Releases
-  * ```2023-11-29``` version ```3.1.0```
+  * ```2023-12-01``` version ```3.1.1```
     * swicth to api v3 
   * ```2023-03-29``` version ```2.1.0```
     * swicth to api v2 in [Create buy order](#createbuyorder), [Create sell order](#createsellorder) and [Cancel order](#cancelorder) 

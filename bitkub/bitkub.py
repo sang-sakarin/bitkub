@@ -61,6 +61,12 @@ class Bitkub:
         payload = self._json_encode(payload)
 
         return payload
+    
+    def _get_swap_sym(self, sym):
+        sym_swap = sym.split('_')
+        sym = f'{sym_swap[1]}_{sym_swap[0]}'
+
+        return sym
 
     def set_api_key(self, api_key):
         self.api_key = api_key
@@ -182,7 +188,7 @@ class Bitkub:
 
     @check_in_attributes(["api_key", "api_secret"])
     def my_open_orders(self, sym=''):
-        url = self._get_path("MARKET_MY_OPEN_ORDERS", sym=sym)
+        url = self._get_path("MARKET_MY_OPEN_ORDERS", sym=self._get_swap_sym(sym))
         ts = self.servertime()
         sig = self._get_signature('GET', ts, url)
         
@@ -190,7 +196,7 @@ class Bitkub:
 
     @check_in_attributes(["api_key", "api_secret"])
     def my_open_history(self, sym='', p=1, lmt=10, start=None, end=None):
-        url = self._get_path("MARKET_MY_ORDER_HISTORY", sym=sym, p=p, lmt=lmt, start=start, end=end)
+        url = self._get_path("MARKET_MY_ORDER_HISTORY", sym=self._get_swap_sym(sym), p=p, lmt=lmt, start=start, end=end)
         ts = self.servertime()
         sig = self._get_signature('GET', ts, url)
         
@@ -198,11 +204,11 @@ class Bitkub:
 
     @check_in_attributes(["api_key", "api_secret"])
     def order_info(self, sym='', id=None, sd='buy', hash=''):
-        url = self._get_path("MARKET_ORDER_INFO", sym=sym, id=id, sd=sd, hash=hash)
+        url = self._get_path("MARKET_ORDER_INFO", sym=self._get_swap_sym(sym), id=id, sd=sd, hash=hash)
         ts = self.servertime()
-        sig = self._get_signature('POST', ts, url)
+        sig = self._get_signature('GET', ts, url)
         
-        return basic_request('POST', url, headers=self._get_headers(ts, sig))
+        return basic_request('GET', url, headers=self._get_headers(ts, sig))
 
     @check_in_attributes(["api_key", "api_secret"])
     def crypto_address(self, p=1, lmt=10):
