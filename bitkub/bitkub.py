@@ -196,7 +196,10 @@ class Bitkub:
 
     @check_in_attributes(["api_key", "api_secret"])
     def my_open_history(self, sym='', p=1, lmt=10, start=None, end=None):
-        url = self._get_path("MARKET_MY_ORDER_HISTORY", sym=self._get_swap_sym(sym), p=p, lmt=lmt, start=start, end=end)
+        if start is None or end is None:
+            url = self._get_path("MARKET_MY_ORDER_HISTORY", sym=self._get_swap_sym(sym), p=p, lmt=lmt)
+        else:
+            url = self._get_path("MARKET_MY_ORDER_HISTORY_STARTEND", sym=self._get_swap_sym(sym), p=p, lmt=lmt, start=start, end=end)
         ts = self.servertime()
         sig = self._get_signature('GET', ts, url)
         
