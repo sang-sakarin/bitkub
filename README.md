@@ -4,6 +4,8 @@
 A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-docs) API
 
 ## Releases
+  * ```2023-12-11``` version ```3.1.3```
+    * revise tradingview history
   * ```2023-12-01``` version ```3.1.1```
     * swicth to api v3 
   * ```2023-03-29``` version ```2.1.0```
