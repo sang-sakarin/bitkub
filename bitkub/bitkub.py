@@ -114,8 +114,10 @@ class Bitkub:
 
         return basic_request('GET', url)
 
-    def tradingview(self, sym='', int=1, frm='', to=''):
-        url = self._get_path("MARKET_TRADING_VIEW_PATH", sym=sym, int=int, frm=frm, to=to)
+    def tradingview(self, sym='', resolution=1, frm='', to=''):
+        frm = str(int(int(frm)/1000)) if int(frm) > 9999999999 else str(int(frm))
+        to = str(int(int(to)/1000)) if int(to) > 9999999999 else str(int(to))
+        url = self._get_path("MARKET_TRADING_VIEW_PATH", sym=self._get_swap_sym(sym), resolution=resolution, frm=frm, to=to)
 
         return basic_request('GET', url)
 

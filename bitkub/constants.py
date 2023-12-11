@@ -8,7 +8,7 @@ ENDPOINTS = {
     "MARKET_BIDS_PATH": "/api/market/bids?sym={sym}&lmt={lmt}",
     "MARKET_ASKS_PATH": "/api/market/asks?sym={sym}&lmt={lmt}",
     "MARKET_BOOKS_PATH": "/api/market/books?sym={sym}&lmt={lmt}",
-    "MARKET_TRADING_VIEW_PATH": "/tradingview/history?symbol={sym}&resolution={int}&from={frm}&to={to}",
+    "MARKET_TRADING_VIEW_PATH": "/tradingview/history?symbol={sym}&resolution={resolution}&from={frm}&to={to}",
     "MARKET_DEPTH_PATH": "/api/market/depth?sym={sym}&lmt={lmt}",
 
     "MARKET_WALLET": "/api/v3/market/wallet",
