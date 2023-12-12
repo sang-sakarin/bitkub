@@ -1,12 +1,9 @@
 from bitkub import Bitkub
 import time
 
-# # v2
-# API_KEY = "e8bab6052cb17080bba090c4227615df"
-# API_SECRET = "08a30e4b51402d7481cd07fa736c08ac"
 # v3
-API_KEY = "fc1eb3955c7b6f5007f3cc1be81c9ac8e3d74961db8f07b01ff4fe96c4854fd9"
-API_SECRET = "4d43915198944cc488ca04977e8d3749375d0efb9e4e422cb1b531394fd83d92C0dQ7pbG21nJgSLJfzmHueJ8aSl4"
+API_KEY = ""
+API_SECRET = ""
 
 
 bitkub = Bitkub()

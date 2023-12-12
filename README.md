@@ -7,9 +7,9 @@ A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-
   * ```2023-12-11``` version ```3.1.3```
     * revise tradingview history
   * ```2023-12-01``` version ```3.1.1```
-    * swicth to api v3 
+    * switch to api v3 
   * ```2023-03-29``` version ```2.1.0```
-    * swicth to api v2 in [Create buy order](#createbuyorder), [Create sell order](#createsellorder) and [Cancel order](#cancelorder) 
+    * switch to api v2 in [Create buy order](#createbuyorder), [Create sell order](#createsellorder) and [Cancel order](#cancelorder) 
     * remove [Create sell order by fiat](#createsellorderfiat), Deprecated at 2023-03-27
   * ```2022-01-07``` version ```1.1.0```
     * add [Create buy order test](#createbuyordertest)
