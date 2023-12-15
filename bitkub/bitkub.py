@@ -62,9 +62,15 @@ class Bitkub:
 
         return payload
     
-    def _get_swap_sym(self, sym):
+    def _get_swap_sym(self, sym, is_base_quote=True):
         sym_swap = sym.split('_')
-        sym = f'{sym_swap[1]}_{sym_swap[0]}'
+        
+        if is_base_quote:
+            if sym_swap[0] == 'THB':
+                sym = f'{sym_swap[1]}_{sym_swap[0]}'
+        else:
+            if sym_swap[0] != 'THB':
+                sym = f'{sym_swap[1]}_{sym_swap[0]}'
 
         return sym
 
@@ -147,7 +153,7 @@ class Bitkub:
     @check_in_attributes(["api_key", "api_secret"])
     def place_bid(self, sym='', amt=1, rat=1, typ='limit', client_id=''):
         url = self._get_path("MARKET_PLACE_BID")
-        payload = self._get_payload(sym=sym, amt=amt, rat=rat, typ=typ, client_id=client_id)
+        payload = self._get_payload(sym=self._get_swap_sym(sym), amt=amt, rat=rat, typ=typ, client_id=client_id)
         ts = self.servertime()
         sig = self._get_signature('POST', ts, url, payload)
         
@@ -161,7 +167,7 @@ class Bitkub:
     @check_in_attributes(["api_key", "api_secret"])
     def place_ask(self, sym='', amt=1, rat=1, typ='limit', client_id=''):
         url = self._get_path("MARKET_PLACE_ASK")
-        payload = self._get_payload(sym=sym, amt=amt, rat=rat, typ=typ, client_id=client_id)
+        payload = self._get_payload(sym=self._get_swap_sym(sym), amt=amt, rat=rat, typ=typ, client_id=client_id)
         ts = self.servertime()
         sig = self._get_signature('POST', ts, url, payload)
         
