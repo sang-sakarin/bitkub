@@ -4,6 +4,15 @@
 A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-docs) API
 
 ## Releases
+  * ```2023-12-14``` version ```3.1.4```
+    * change sym from quote_base to base_quote
+  * ```2023-12-11``` version ```3.1.3```
+    * revise tradingview history
+  * ```2023-12-01``` version ```3.1.1```
+    * switch to api v3 
+  * ```2023-03-29``` version ```2.1.0```
+    * switch to api v2 in [Create buy order](#createbuyorder), [Create sell order](#createsellorder) and [Cancel order](#cancelorder) 
+    * remove [Create sell order by fiat](#createsellorderfiat), Deprecated at 2023-03-27
   * ```2022-01-07``` version ```1.1.0```
     * add [Create buy order test](#createbuyordertest)
     * add [Create sell order test](#createsellordertest)
@@ -58,7 +67,7 @@ A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-
 
 ## Installation <a name="installation"></a>
 
-    pip install bitkub
+    pip install bitkub-v2
 
 ## Usage <a name="usage"></a>
 
@@ -118,7 +127,7 @@ Get server timestamp.
 
 #### Response:
 
-    1583051817
+    1701251212273
 
 ### Viewing symbols <a name="viewingsymbols"></a>
 
@@ -449,33 +458,36 @@ Get balances info: this includes both available and reserved balances. ```Requir
 Create a buy order. ```Required initial secure obj```
 
 #### Function:
-    bitkub.place_bid(sym='THB_BTC', amt=1, rat=1, typ='limit')
+    bitkub.place_bid(sym='THB_BTC', amt=1, rat=1, typ='limit', client_id='')
 
 #### Parameter:
   * ```sym``` **string** The symbol
   * ```amt``` **float** Amount you want to spend with no trailing zero (e.g 1000.00 is invalid, 1000 is ok) ```default``` 1
   * ```rat``` **float** Rate you want for the order with no trailing zero (e.g 1000.00 is invalid, 1000 is ok) ```default``` 1
-  * ```typ``` **string** Order type: limit or market ```default``` limit
+  * ```typ``` **string** Order type: limit or market (for market order, please specify rat as 0) ```default``` limit
+  * ```client_id``` **string** your id for reference ( not required )
 
 
 #### Response:
 
     {
-      'error': 0,
-      'result': {
-        'id': 1,
-        'hash': 'fwQ6dnQWQPs4cbatF5Am2xCDP1J',
-        'typ': 'limit',
-        'amt': 1,
-        'rat': 1,
-        'fee': 2.5,
-        'cre': 2.5,
-        'rec': 0.06666666,
-        'ts': 1533834547
+      "error": 0,
+      "result": {
+        "id": 1, // order id
+        "hash": "fwQ6dnQWQPs4cbatF5Am2xCDP1J", // order hash
+        "typ": "limit", // order type
+        "amt": 1000, // spending amount
+        "rat": 15000, // rate
+        "fee": 2.5, // fee
+        "cre": 2.5, // fee credit used
+        "rec": 0.06666666, // amount to receive
+        "ts": 1533834547 // timestamp
+        "ci": "input_client_id" // input id for reference
       }
     }
 
 ### Create buy order test <a name="createbuyordertest"></a>
+<span style="color:white;background:red;"> ⚠️ This API is <strong style="color:yellow;">deprecated.</strong> (2023-11-29) </span>
 
 Create a buy order test. ```Required initial secure obj```
 
@@ -513,34 +525,37 @@ Create a buy order test. ```Required initial secure obj```
 Create a sell order. ```Required initial secure obj```
 
 #### Function:
-    bitkub.place_ask(sym='THB_BTC', amt=1, rat=1, typ='limit')
+    bitkub.place_ask(sym='THB_BTC', amt=1, rat=1, typ='limit', client_id='')
 
 #### Parameter:
   * ```sym``` **string** The symbol
-  * ```amt``` **float** Amount you want to spend with no trailing zero (e.g 1000.00 is invalid, 1000 is ok) ```default``` 1
+  * ```amt``` **float** Amount you want to sell with no trailing zero (e.g 0.10000000 is invalid, 0.1 is ok) ```default``` 1
   * ```rat``` **float** Rate you want for the order with no trailing zero (e.g 1000.00 is invalid, 1000 is ok) ```default``` 1
-  * ```typ``` **string** Order type: limit or market ```default``` limit
+  * ```typ``` **string** Order type: limit or market (for market order, please specify rat as 0) ```default``` limit
+  * ```client_id``` **string** your id for reference ( not required )
 
 
 #### Response:
 
     {
-      'error': 0,
-      'result': {
-        'id': 1,
-        'hash': 'fwQ6dnQWQPs4cbatF5Am2xCDP1J',
-        'typ': 'limit',
-        'amt': 1,
-        'rat': 1,
-        'fee': 2.5,
-        'cre': 2.5,
-        'rec': 0.06666666,
-        'ts': 1533834547
+      "error": 0,
+      "result": {
+        "id": 1, // order id
+        "hash": "fwQ6dnQWQPs4cbatFGc9LPnpqyu", // order hash
+        "typ": "limit", // order type
+        "amt": 1.00000000, // selling amount
+        "rat": 15000, // rate
+        "fee": 37.5, // fee
+        "cre": 37.5, // fee credit used
+        "rec": 15000, // amount to receive
+        "ts": 1533834844 // timestamp
+        "ci": "input_client_id" // input id for reference
       }
     }
 
 
 ### Create sell order test <a name="createsellordertest"></a>
+<span style="color:white;background:red;"> ⚠️ This API is <strong style="color:yellow;">deprecated.</strong> (2023-11-29) </span>
 
 Create a sell order test. ```Required initial secure obj```
 
@@ -574,11 +589,12 @@ Create a sell order test. ```Required initial secure obj```
 
 
 ### Create sell order by fiat <a name="createsellorderfiat"></a>
+<span style="color:white;background:red;"> ⚠️ This API is <strong style="color:yellow;">deprecated.</strong> (2023-03-27) </span>
 
 Create a sell order by specifying the fiat amount you want to receive (selling amount of cryptocurrency is automatically calculated). ```Required initial secure obj```
 
 #### Function:
-    bitkub.place_bid(sym='THB_BTC', amt=1, rat=1, typ='limit')
+    bitkub.place_ask_by_fiat(sym='THB_BTC', amt=1, rat=1, typ='limit')
 
 #### Parameter:
   * ```sym``` **string** The symbol
