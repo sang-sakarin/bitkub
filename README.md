@@ -4,6 +4,8 @@
 A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-docs) API
 
 ## Releases
+  * ```2024-10-26``` version ```2.0.0```
+    * support api ```v3```
   * ```2022-01-07``` version ```1.1.0```
     * add [Create buy order test](#createbuyordertest)
     * add [Create sell order test](#createsellordertest)
@@ -33,10 +35,7 @@ A Python library for [bitkub.com](https://github.com/bitkub/bitkub-official-api-
   - [Viewing wallet](#viewingwallet)
   - [Viewing balances](#viewingbalances)
   - [Create buy order](#createbuyorder)
-  - [Create buy order test](#createbuyordertest)
   - [Create sell order](#createsellorder)
-  - [Create sell order test](#createsellordertest)
-  - [Create sell order by fiat](#createsellorderfiat)
   - [Cancel order](#cancelorder)
   - [My open orders](#myopenorders)
   - [My order history](#myorderhistory)
@@ -316,34 +315,6 @@ List all open orders.
     }
 
 
-### Viewing depth <a name="viewingdepth"></a>
-
-Get depth information.
-
-#### Function:
-    bitkub.depth(sym='THB_BTC', lmt=1)
-#### Parameter:
-
-  * ```sym``` **string** The symbol
-  * ```lmt``` **int** Depth size  ```default``` 1
-
-#### Response:
-
-    {
-      'asks': [
-        [
-          277946.16,
-          1.29675
-        ]
-      ],
-      'bids': [
-        [
-          277936.27,
-          0.94071896
-        ]
-      ]
-    }
-
 
 ### Viewing tradingview history <a name="viewingtradingviewhistory"></a>
 
@@ -400,6 +371,34 @@ Get historical data for TradingView chart.
       ]
     }
 
+### Viewing depth <a name="viewingdepth"></a>
+
+Get depth information.
+
+#### Function:
+    bitkub.depth(sym='THB_BTC', lmt=1)
+#### Parameter:
+
+  * ```sym``` **string** The symbol
+  * ```lmt``` **int** Depth size  ```default``` 1
+
+#### Response:
+
+    {
+      'asks': [
+        [
+          277946.16,
+          1.29675
+        ]
+      ],
+      'bids': [
+        [
+          277936.27,
+          0.94071896
+        ]
+      ]
+    }
+
 
 ### Viewing wallet <a name="viewingwallet"></a>
 
@@ -449,13 +448,15 @@ Get balances info: this includes both available and reserved balances. ```Requir
 Create a buy order. ```Required initial secure obj```
 
 #### Function:
-    bitkub.place_bid(sym='THB_BTC', amt=1, rat=1, typ='limit')
+    bitkub.place_bid(sym='THB_BTC', amt=1, rat=1, typ='limit', client_id='a7sjas7', post_only=false)
 
 #### Parameter:
   * ```sym``` **string** The symbol
   * ```amt``` **float** Amount you want to spend with no trailing zero (e.g 1000.00 is invalid, 1000 is ok) ```default``` 1
   * ```rat``` **float** Rate you want for the order with no trailing zero (e.g 1000.00 is invalid, 1000 is ok) ```default``` 1
   * ```typ``` **string** Order type: limit or market ```default``` limit
+  * ```client_id``` **string** your id for reference ( not required )
+  * ```post_only``` **bool** Postonly flag: ```true``` or ```false``` ( not required )
 
 
 #### Response:
@@ -474,52 +475,21 @@ Create a buy order. ```Required initial secure obj```
         'ts': 1533834547
       }
     }
-
-### Create buy order test <a name="createbuyordertest"></a>
-
-Create a buy order test. ```Required initial secure obj```
-
-#### Function:
-    bitkub.place_bid_test(sym='THB_BTC', amt=1, rat=1, typ='limit', client_id='')
-
-#### Parameter:
-  * ```sym``` **string** The symbol
-  * ```amt``` **float** Amount you want to spend with no trailing zero (e.g 1000.00 is invalid, 1000 is ok) ```default``` 1
-  * ```rat``` **float** Rate you want for the order with no trailing zero (e.g 1000.00 is invalid, 1000 is ok) ```default``` 1
-  * ```typ``` **string** Order type: limit or market ```default``` limit
-  * ```client_id``` **string** Your id for reference ( no required )
-
-
-#### Response:
-
-    {
-      'error': 0,
-      'result': {
-        'id': 1,
-        'hash': 'fwQ6dnQWQPs4cbatF5Am2xCDP1J',
-        'typ': 'limit',
-        'amt': 1,
-        'rat': 1,
-        'fee': 2.5,
-        'cre': 2.5,
-        'rec': 0.06666666,
-        'ts': 1533834547
-      }
-    }
-
 
 ### Create sell order <a name="createsellorder"></a>
 
 Create a sell order. ```Required initial secure obj```
 
 #### Function:
-    bitkub.place_ask(sym='THB_BTC', amt=1, rat=1, typ='limit')
+    bitkub.place_ask(sym='THB_BTC', amt=1, rat=1, typ='limit', client_id='a7sjas7', post_only=false)
 
 #### Parameter:
   * ```sym``` **string** The symbol
   * ```amt``` **float** Amount you want to spend with no trailing zero (e.g 1000.00 is invalid, 1000 is ok) ```default``` 1
   * ```rat``` **float** Rate you want for the order with no trailing zero (e.g 1000.00 is invalid, 1000 is ok) ```default``` 1
-  * ```typ``` **string** Order type: limit or market ```default``` limit
+  * ```typ``` **string** Order type: limit or market ```default``` limit'
+  * ```client_id``` **string** your id for reference ( not required )
+  * ```post_only``` **bool** Postonly flag: ```true``` or ```false``` ( not required )
 
 
 #### Response:
@@ -540,72 +510,7 @@ Create a sell order. ```Required initial secure obj```
     }
 
 
-### Create sell order test <a name="createsellordertest"></a>
-
-Create a sell order test. ```Required initial secure obj```
-
-#### Function:
-    bitkub.place_ask_test(sym='THB_BTC', amt=1, rat=1, typ='limit', client_id='')
-
-#### Parameter:
-  * ```sym``` **string** The symbol
-  * ```amt``` **float** Amount you want to spend with no trailing zero (e.g 1000.00 is invalid, 1000 is ok) ```default``` 1
-  * ```rat``` **float** Rate you want for the order with no trailing zero (e.g 1000.00 is invalid, 1000 is ok) ```default``` 1
-  * ```typ``` **string** Order type: limit or market ```default``` limit
-  * ```client_id``` **string** Your id for reference ( no required )
-
-
-#### Response:
-
-    {
-      'error': 0,
-      'result': {
-        'id': 1,
-        'hash': 'fwQ6dnQWQPs4cbatF5Am2xCDP1J',
-        'typ': 'limit',
-        'amt': 1,
-        'rat': 1,
-        'fee': 2.5,
-        'cre': 2.5,
-        'rec': 0.06666666,
-        'ts': 1533834547
-      }
-    }
-
-
-### Create sell order by fiat <a name="createsellorderfiat"></a>
-
-Create a sell order by specifying the fiat amount you want to receive (selling amount of cryptocurrency is automatically calculated). ```Required initial secure obj```
-
-#### Function:
-    bitkub.place_bid(sym='THB_BTC', amt=1, rat=1, typ='limit')
-
-#### Parameter:
-  * ```sym``` **string** The symbol
-  * ```amt``` **float** Amount you want to spend with no trailing zero (e.g 1000.00 is invalid, 1000 is ok) ```default``` 1
-  * ```rat``` **float** Rate you want for the order with no trailing zero (e.g 1000.00 is invalid, 1000 is ok) ```default``` 1
-  * ```typ``` **string** Order type: limit or market ```default``` limit
-
-
-#### Response:
-
-    {
-      'error': 0,
-      'result': {
-        'id': 1,
-        'hash': 'fwQ6dnQWQPs4cbatF5Am2xCDP1J',
-        'typ': 'limit',
-        'amt': 1,
-        'rat': 1,
-        'fee': 2.5,
-        'cre': 2.5,
-        'rec': 0.06666666,
-        'ts': 1533834547
-      }
-    }
-
-
-### Cancel orrder<a name="cancelorder"></a>
+### Cancel order<a name="cancelorder"></a>
 
 Cancel an open order. ```Required initial secure obj```
 
@@ -793,13 +698,14 @@ List all crypto addresses. ```Required initial secure obj```
 Make a withdrawal to a trusted address. ```Required initial secure obj```
 
 #### Function:
-    bitkub.crypto_withdraw(cur='BTC', amt=0.1, adr='4asyjKw6XScneNvhJTLVHS9XfNYM7VBf8x', mem='')
+    bitkub.crypto_withdraw(cur='BTC', amt=0.1, adr='4asyjKw6XScneNvhJTLVHS9XfNYM7VBf8x', mem='', net='')
 
 #### Parameter:
   * ```cur``` **string** Currency for withdrawal (e.g. BTC, ETH)
   * ```amt``` **float** Amount you want to withdraw
   * ```adr``` **string** Address to which you want to withdraw
   * ```mem``` **string** (Optional) Memo or destination tag to which you want to withdraw
+  * ```net``` **string** Cryptocurrency network to withdraw
 
 
 #### Response:
@@ -825,13 +731,14 @@ Make a withdrawal to a trusted address. ```Required initial secure obj```
 The destination address is not required to be a trusted address. This API is not enabled by default, Only KYB users can request this feature by contacting us via support@bitkub.com
 
 #### Function:
-    bitkub.crypto_internal_withdraw(cur='BTC', amt=0.1, adr='4asyjKw6XScneNvhJTLVHS9XfNYM7VBf8x', mem='')
+    bitkub.crypto_internal_withdraw(cur='BTC', amt=0.1, adr='4asyjKw6XScneNvhJTLVHS9XfNYM7VBf8x', mem='', net='')
 
 #### Parameter:
   * ```cur``` **string** Currency for withdrawal (e.g. BTC, ETH)
   * ```amt``` **float** Amount you want to withdraw
   * ```adr``` **string** Address to which you want to withdraw
   * ```mem``` **string** (Optional) Memo or destination tag to which you want to withdraw
+  * ```net``` **string** Cryptocurrency network to withdraw
 
 
 #### Response:

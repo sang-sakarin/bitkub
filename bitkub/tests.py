@@ -46,7 +46,7 @@ class BitkubTest(TestCase):
         self.assertTrue(True)
 
     def test_tradingview(self):
-        # print(self.bitkub.tradingview())
+        # print(self.bitkub.tradingview(sym="BTC_THB", int="5", frm="1633424427", to="1633427427"))
         self.assertTrue(True)
 
     def test_depth(self):
@@ -57,36 +57,36 @@ class BitkubTest(TestCase):
         # print(self.bitkub.wallet())
         self.assertTrue(True)
 
+    def test_user_trading_credits(self):
+        # print(self.bitkub.user_trading_credits())
+        self.assertTrue(True)
+
+    def test_place_bid(self):
+        # print(self.bitkub.place_bid(sym='BTC_THB', amt=10, rat=1))
+        self.assertTrue(True)
+
+    def test_place_ask(self):
+        # print(self.bitkub.place_ask(sym='BTC_THB', amt=10, rat=1))
+        self.assertTrue(True)
+
+    def test_cancel_order(self):
+        # print(self.bitkub.cancel_order(sym='BTC_THB', id='', sd='buy', hash=''))
+        self.assertTrue(True)
+
     def test_balances(self):
         # print(self.bitkub.balances())
         self.assertTrue(True)
 
-    def test_place_bid(self):
-        # print(self.bitkub.place_bid(sym='THB_BTC'))
-        self.assertTrue(True)
-
-    def test_place_ask(self):
-        # print(self.bitkub.place_ask(sym='THB_BTC'))
-        self.assertTrue(True)
-
-    def test_place_ask_by_fiat(self):
-        # print(self.bitkub.place_ask_by_fiat(sym='THB_BTC'))
-        self.assertTrue(True)
-
-    def test_cancel_order(self):
-        # print(self.bitkub.cancel_order(sym='THB_BTC', id=1, sd='buy', hash='123'))
-        self.assertTrue(True)
-
     def test_my_open_orders(self):
-        # print(self.bitkub.my_open_orders(sym='THB_BTC'))
+        # print(self.bitkub.my_open_orders(sym='BTC_THB'))
         self.assertTrue(True)
 
     def test_my_open_history(self):
-        # print(self.bitkub.my_open_history(sym='THB_BTC'))
+        # print(self.bitkub.my_open_history(sym='BTC_THB'))
         self.assertTrue(True)
 
     def test_order_info(self):
-        # print(self.bitkub.order_info(sym='THB_BTC'))
+        # print(self.bitkub.order_info(sym='THB_BTC', id=10000))
         self.assertTrue(True)
 
     def test_crypto_address(self):
@@ -97,12 +97,20 @@ class BitkubTest(TestCase):
         # print(self.bitkub.crypto_withdraw())
         self.assertTrue(True)
 
+    def test_crypto_internal_withdraw(self):
+        # print(self.bitkub.crypto_internal_withdraw())
+        self.assertTrue(True)
+
     def test_crypto_deposit_history(self):
         # print(self.bitkub.crypto_deposit_history())
         self.assertTrue(True)
 
     def test_crypto_withdraw_history(self):
         # print(self.bitkub.crypto_withdraw_history())
+        self.assertTrue(True)
+
+    def test_crypto_generate_address(self):
+        # print(self.bitkub.crypto_generate_address(sym='THB_ETH'))
         self.assertTrue(True)
 
     def test_fiat_accounts(self):
@@ -129,6 +137,3 @@ class BitkubTest(TestCase):
         # print(self.bitkub.user_limits())
         self.assertTrue(True)
 
-    def test_user_trading_credits(self):
-        # print(self.bitkub.user_trading_credits())
-        self.assertTrue(True)
